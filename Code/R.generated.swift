@@ -11,12 +11,9 @@ struct R {
   
   struct file {
     static var ccstyleCss: NSURL? { return _R.hostingBundle?.URLForResource("ccstyle", withExtension: "css") }
-    static var iosSocialSdkShakeHtml: NSURL? { return _R.hostingBundle?.URLForResource("ios-social-sdk-shake", withExtension: "html") }
     static var jquery164MinJs: NSURL? { return _R.hostingBundle?.URLForResource("jquery-1.6.4.min", withExtension: "js") }
     static var localizableStrings: NSURL? { return _R.hostingBundle?.URLForResource("Localizable", withExtension: "strings") }
-    static var mikuDancingCodingIo: NSURL? { return _R.hostingBundle?.URLForResource("miku-dancing.coding", withExtension: "io") }
     static var pushConfigPlist: NSURL? { return _R.hostingBundle?.URLForResource("PushConfig", withExtension: "plist") }
-    static var uMSocialSDKResourcesNewBundle: NSURL? { return _R.hostingBundle?.URLForResource("UMSocialSDKResourcesNew", withExtension: "bundle") }
   }
   
   struct font {
@@ -46,14 +43,7 @@ struct R {
   }
   
   struct nib {
-    static var uMSCommentDetailController: _R.nib._UMSCommentDetailController { return _R.nib._UMSCommentDetailController() }
-    static var uMSCommentInputController: _R.nib._UMSCommentInputController { return _R.nib._UMSCommentInputController() }
-    static var uMSCommentInputControlleriPad: _R.nib._UMSCommentInputControlleriPad { return _R.nib._UMSCommentInputControlleriPad() }
-    static var uMSLoginViewController: _R.nib._UMSLoginViewController { return _R.nib._UMSLoginViewController() }
-    static var uMSShareListController: _R.nib._UMSShareListController { return _R.nib._UMSShareListController() }
-    static var uMShareEditViewController: _R.nib._UMShareEditViewController { return _R.nib._UMShareEditViewController() }
-    static var uMShareEditViewControlleriPad: _R.nib._UMShareEditViewControlleriPad { return _R.nib._UMShareEditViewControlleriPad() }
-    static var uMSnsAccountViewController: _R.nib._UMSnsAccountViewController { return _R.nib._UMSnsAccountViewController() }
+    
   }
   
   struct reuseIdentifier {
@@ -84,77 +74,7 @@ struct _R {
   static var hostingBundle: NSBundle? { return NSBundle(identifier: "com.zixun.myhelper") }
   
   struct nib {
-    struct _UMSCommentDetailController: NibResource {
-      var instance: UINib { return UINib.init(nibName: "UMSCommentDetailController", bundle: _R.hostingBundle) }
-      var name: String { return "UMSCommentDetailController" }
-      
-      func instantiateWithOwner(ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]?) -> [AnyObject] {
-        return instance.instantiateWithOwner(ownerOrNil, options: optionsOrNil)
-      }
-    }
     
-    struct _UMSCommentInputController: NibResource {
-      var instance: UINib { return UINib.init(nibName: "UMSCommentInputController", bundle: _R.hostingBundle) }
-      var name: String { return "UMSCommentInputController" }
-      
-      func instantiateWithOwner(ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]?) -> [AnyObject] {
-        return instance.instantiateWithOwner(ownerOrNil, options: optionsOrNil)
-      }
-    }
-    
-    struct _UMSCommentInputControlleriPad: NibResource {
-      var instance: UINib { return UINib.init(nibName: "UMSCommentInputControlleriPad", bundle: _R.hostingBundle) }
-      var name: String { return "UMSCommentInputControlleriPad" }
-      
-      func instantiateWithOwner(ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]?) -> [AnyObject] {
-        return instance.instantiateWithOwner(ownerOrNil, options: optionsOrNil)
-      }
-    }
-    
-    struct _UMSLoginViewController: NibResource {
-      var instance: UINib { return UINib.init(nibName: "UMSLoginViewController", bundle: _R.hostingBundle) }
-      var name: String { return "UMSLoginViewController" }
-      
-      func instantiateWithOwner(ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]?) -> [AnyObject] {
-        return instance.instantiateWithOwner(ownerOrNil, options: optionsOrNil)
-      }
-    }
-    
-    struct _UMSShareListController: NibResource {
-      var instance: UINib { return UINib.init(nibName: "UMSShareListController", bundle: _R.hostingBundle) }
-      var name: String { return "UMSShareListController" }
-      
-      func instantiateWithOwner(ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]?) -> [AnyObject] {
-        return instance.instantiateWithOwner(ownerOrNil, options: optionsOrNil)
-      }
-    }
-    
-    struct _UMShareEditViewController: NibResource {
-      var instance: UINib { return UINib.init(nibName: "UMShareEditViewController", bundle: _R.hostingBundle) }
-      var name: String { return "UMShareEditViewController" }
-      
-      func instantiateWithOwner(ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]?) -> [AnyObject] {
-        return instance.instantiateWithOwner(ownerOrNil, options: optionsOrNil)
-      }
-    }
-    
-    struct _UMShareEditViewControlleriPad: NibResource {
-      var instance: UINib { return UINib.init(nibName: "UMShareEditViewControlleriPad", bundle: _R.hostingBundle) }
-      var name: String { return "UMShareEditViewControlleriPad" }
-      
-      func instantiateWithOwner(ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]?) -> [AnyObject] {
-        return instance.instantiateWithOwner(ownerOrNil, options: optionsOrNil)
-      }
-    }
-    
-    struct _UMSnsAccountViewController: NibResource {
-      var instance: UINib { return UINib.init(nibName: "UMSnsAccountViewController", bundle: _R.hostingBundle) }
-      var name: String { return "UMSnsAccountViewController" }
-      
-      func instantiateWithOwner(ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]?) -> [AnyObject] {
-        return instance.instantiateWithOwner(ownerOrNil, options: optionsOrNil)
-      }
-    }
   }
 }
 

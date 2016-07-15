@@ -43,8 +43,9 @@ class CCAppConfiguration: NSObject {
     private class func configureYoumengSocial() {
         UMSocialData.setAppKey(CCAppKey.appUM)
         UMSocialWechatHandler.setWXAppId(CCAppKey.appWeChat.appkey, appSecret: CCAppKey.appWeChat.secret, url: nil)
-        UMSocialSinaHandler.openSSOWithRedirectURL("http://sns.whalecloud.com/sina2/callback")
-        UMSocialConfig.hiddenNotInstallPlatforms([UMShareToQQ,UMShareToQzone,UMShareToWechatSession,UMShareToWechatTimeline])
+        
+        UMSocialSinaSSOHandler.openNewSinaSSOWithAppKey(CCAppKey.appSina.appkey, secret: CCAppKey.appSina.secret, redirectURL: "http://sns.whalecloud.com/sina2/callback")
+        UMSocialConfig.hiddenNotInstallPlatforms(nil)
     }
     
     /**

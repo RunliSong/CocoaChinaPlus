@@ -1,8 +1,5 @@
 PODS:
   - Alamofire (2.0.2)
-  - GCDWebServer (3.2.7):
-    - GCDWebServer/Core (= 3.2.7)
-  - GCDWebServer/Core (3.2.7)
   - Ji (1.2.0):
     - Ji/Ji (= 1.2.0)
   - Ji/Ji (1.2.0):
@@ -20,6 +17,7 @@ PODS:
   - SVPullToRefresh (0.4.1)
   - SwiftyUserDefaults (2.0.0)
   - UMengAnalytics (3.5.16)
+  - UMengSocialCOM (5.2.1)
   - ZXKit (0.1.0):
     - MBProgressHUD (~> 0.9.1)
     - Neon (~> 0.0.3)
@@ -28,7 +26,6 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 2.0.0)
-  - GCDWebServer (~> 3.2.7)
   - Ji (~> 1.2.0)
   - Kingfisher (~> 1.8.2)
   - MBProgressHUD (~> 0.9.1)
@@ -41,6 +38,7 @@ DEPENDENCIES:
   - SVPullToRefresh (= 0.4.1)
   - SwiftyUserDefaults (~> 2.0.0)
   - UMengAnalytics (~> 3.5.10)
+  - UMengSocialCOM (~> 5.2.1)
   - ZXKit (from `https://github.com/zixun/ZXKit.git`)
 
 EXTERNAL SOURCES:
@@ -54,7 +52,6 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: 8edbab00802a752bb5240cc2abe70e7e881488ad
-  GCDWebServer: 76a9540371d5f12f850b32ec7f555dd2d266e543
   Ji: ddebb22f9ac445db6e884b66f78ea74fb135fdb7
   Kingfisher: 780fed0fa82692a3bd59d53329ae2b85cdd354a5
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
@@ -67,6 +64,7 @@ SPEC CHECKSUMS:
   SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
   SwiftyUserDefaults: 1266e9734c68bcfbac8294ee84173dc8ba6db312
   UMengAnalytics: fdf0c0a8c07d8bffc012ffa3c68e5d490af42098
+  UMengSocialCOM: 074c135ce349aa4c8848d3fb8458757bcb6ffb67
   ZXKit: c2ab6e4961361d9736689e9b9beea888c3e4761c
 
 COCOAPODS: 0.39.0

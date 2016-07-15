@@ -11,7 +11,8 @@
 //友盟分享
 #import "UMSocial.h"
 #import "UMSocialWechatHandler.h"
-#import "UMSocialSinaHandler.h"
+//#import "UMSocialSinaHandler.h"
+#import "UMSocialSinaSSOHandler.h"
 
 //极光推送
 #import "APService.h"
