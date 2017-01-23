@@ -17,19 +17,19 @@ class CCPBBSEditionViewController: ZXBaseViewController {
     
     //UI
     lazy var tableview: UITableView = {
-        let newTableView = UITableView(frame: CGRectZero, style: .Plain)
+        let newTableView = UITableView(frame: CGRect.zero, style: .plain)
         newTableView.delegate = self
         newTableView.dataSource = self
         newTableView.backgroundColor = ZXColor(0x000000, alpha: 0.8)
-        newTableView.separatorStyle = .None
-        newTableView.addInfiniteScrollingWithActionHandler({ [weak self] () -> Void in
+        newTableView.separatorStyle = .none
+        newTableView.addInfiniteScrolling(actionHandler: { [weak self] () -> Void in
             guard let sself = self else {
                 return
             }
             sself.loadNextPage();
         })
-        newTableView.infiniteScrollingView.activityIndicatorViewStyle = .White
-        newTableView.registerClass(CCPBBSEditionTableViewCell.self, forCellReuseIdentifier: "CCPBBSEditionTableViewCell")
+        newTableView.infiniteScrollingView.activityIndicatorViewStyle = .white
+        newTableView.register(CCPBBSEditionTableViewCell.self, forCellReuseIdentifier: "CCPBBSEditionTableViewCell")
         return newTableView
     }()
     
@@ -39,7 +39,7 @@ class CCPBBSEditionViewController: ZXBaseViewController {
     //url
     var currentLink = ""
     
-    required init(navigatorURL URL: NSURL, query: Dictionary<String, String>) {
+    required init(navigatorURL URL: Foundation.URL, query: Dictionary<String, String>) {
         super.init(navigatorURL: URL, query: query)
 
         //設置tableview
@@ -65,6 +65,10 @@ class CCPBBSEditionViewController: ZXBaseViewController {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+
+    required init(navigatorURL URL: NSURL, query: Dictionary<String, String>) {
+        fatalError("init(navigatorURL:query:) has not been implemented")
+    }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -77,9 +81,9 @@ class CCPBBSEditionViewController: ZXBaseViewController {
 extension CCPBBSEditionViewController {
     
     //加載下一個分頁
-    private func loadNextPage() {
+    fileprivate func loadNextPage() {
         guard
-            let url = NSURL(string: self.currentLink),
+            let url = URL(string: self.currentLink),
             let urlParameter = url.paramDictionary()
             else {
                 print("連結缺失或參數錯誤")
@@ -87,7 +91,7 @@ extension CCPBBSEditionViewController {
         }
         
         //建立下一分頁連結
-        var newURL: NSURL
+        var newURL: URL
         if let _ = urlParameter["more"] {
             newURL = url.newURLByReplaceParams(["page": String(self.dataSource.pagenext)])
             self.currentLink = newURL.absoluteString
@@ -104,14 +108,14 @@ extension CCPBBSEditionViewController {
             }
             
             sself.dataSource.append(model)
-            var insertIndexPaths = [NSIndexPath]()
+            var insertIndexPaths = [IndexPath]()
             for post in model.posts {
-                let row = sself.dataSource.posts.indexOf(post)
-                let indexPath = NSIndexPath(forRow: row ?? 0, inSection: 0)
+                let row = sself.dataSource.posts.index(of: post)
+                let indexPath = IndexPath(row: row ?? 0, section: 0)
                 insertIndexPaths.append(indexPath)
             }
             sself.tableview.beginUpdates()
-            sself.tableview.insertRowsAtIndexPaths(insertIndexPaths, withRowAnimation: .None)
+            sself.tableview.insertRows(at: insertIndexPaths, with: .none)
             sself.tableview.endUpdates()
             sself.tableview.infiniteScrollingView.stopAnimating()
         }
@@ -122,12 +126,12 @@ extension CCPBBSEditionViewController {
 // MARK: UITableViewDataSource
 extension CCPBBSEditionViewController: UITableViewDataSource {
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.dataSource.posts.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableview.dequeueReusableCellWithIdentifier("CCPBBSEditionTableViewCell", forIndexPath: indexPath) as! CCPBBSEditionTableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableview.dequeueReusableCell(withIdentifier: "CCPBBSEditionTableViewCell", for: indexPath) as! CCPBBSEditionTableViewCell
         let post = self.dataSource.posts[indexPath.row]
         cell.configure(post)
         return cell
@@ -138,11 +142,11 @@ extension CCPBBSEditionViewController: UITableViewDataSource {
 // MARK: UITableViewDelegate
 extension CCPBBSEditionViewController: UITableViewDelegate {
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let post = self.dataSource.posts[indexPath.row]
         ZXOpenURL("go/ccp/article", param: ["link": post.link])
     }
@@ -153,27 +157,27 @@ extension CCPBBSEditionViewController: UITableViewDelegate {
 class CCPBBSEditionTableViewCell: CCPTableViewCell {
     
     //UI
-    private lazy var titleLabel: UILabel = {
+    fileprivate lazy var titleLabel: UILabel = {
         let newTitleLabel = UILabel()
-        newTitleLabel.textColor = UIColor.whiteColor()
-        newTitleLabel.font = UIFont.boldSystemFontOfSize(14)
-        newTitleLabel.textAlignment = .Left
+        newTitleLabel.textColor = UIColor.white
+        newTitleLabel.font = UIFont.boldSystemFont(ofSize: 14)
+        newTitleLabel.textAlignment = .left
         newTitleLabel.numberOfLines = 2
-        newTitleLabel.lineBreakMode = .ByTruncatingTail
+        newTitleLabel.lineBreakMode = .byTruncatingTail
         return newTitleLabel
     }()
-    private lazy var authorLabel: UILabel = {
+    fileprivate lazy var authorLabel: UILabel = {
         let newAuthorLabel = UILabel()
-        newAuthorLabel.textColor = UIColor.grayColor()
-        newAuthorLabel.font = UIFont.systemFontOfSize(12)
-        newAuthorLabel.textAlignment = .Left
+        newAuthorLabel.textColor = UIColor.gray
+        newAuthorLabel.font = UIFont.systemFont(ofSize: 12)
+        newAuthorLabel.textAlignment = .left
         return newAuthorLabel
     }()
-    private var timeLabel: UILabel = {
+    fileprivate var timeLabel: UILabel = {
         let newTimeLabel = UILabel()
-        newTimeLabel.textColor = UIColor.grayColor()
-        newTimeLabel.font = UIFont.systemFontOfSize(12)
-        newTimeLabel.textAlignment = .Right
+        newTimeLabel.textColor = UIColor.gray
+        newTimeLabel.font = UIFont.systemFont(ofSize: 12)
+        newTimeLabel.textAlignment = .right
         return newTimeLabel
     }()
     
@@ -201,7 +205,7 @@ class CCPBBSEditionTableViewCell: CCPTableViewCell {
         self.timeLabel.anchorInCornerWithAutoSize(Corner.BottomRight, xPad: 4, yPad: 0)
     }
     
-    func configure(model: CCPBBSEditionPostModel) {
+    func configure(_ model: CCPBBSEditionPostModel) {
         titleLabel.text = model.title
         authorLabel.text = model.author
         timeLabel.text = model.time

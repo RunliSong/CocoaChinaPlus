@@ -24,7 +24,7 @@ class CCPTableViewCell: UITableViewCell {
         self.selectedBackgroundView = view
         
         self.containerView = UIView()
-        self.containerView.backgroundColor = UIColor.blackColor()
+        self.containerView.backgroundColor = UIColor.black
         self.addSubview(self.containerView)
     }
     

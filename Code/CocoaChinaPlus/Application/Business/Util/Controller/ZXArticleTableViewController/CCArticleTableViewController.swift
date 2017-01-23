@@ -14,7 +14,7 @@ import CCAD
 class CCArticleTableViewController: ZXBaseViewController {//GADBannerViewDelegate
 
     //RxSwift资源回收包
-    private let disposeBag = DisposeBag()
+    fileprivate let disposeBag = DisposeBag()
     
     //文章列表
     var tableView : CCArticleTableView!
@@ -23,12 +23,12 @@ class CCArticleTableViewController: ZXBaseViewController {//GADBannerViewDelegat
     let loadNextPageTrigger = PublishSubject<Void>()
     
     /// 广告位位置枚举
-    private var adPosition:CCADBannerViewType?
+    fileprivate var adPosition:CCADBannerViewType?
     
-    private var adView: CCADBanner?
+    fileprivate var adView: CCADBanner?
     
     
-    required init(navigatorURL URL: NSURL, query: Dictionary<String, String>) {
+    required init(navigatorURL URL: Foundation.URL, query: Dictionary<String, String>) {
         super.init(navigatorURL: URL, query: query)
         
         //tableview 配置
@@ -50,6 +50,10 @@ class CCArticleTableViewController: ZXBaseViewController {//GADBannerViewDelegat
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    required init(navigatorURL URL: NSURL, query: Dictionary<String, String>) {
+        fatalError("init(navigatorURL:query:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,13 +62,13 @@ class CCArticleTableViewController: ZXBaseViewController {//GADBannerViewDelegat
         self.view.addSubview(self.tableView)
         
         //上拉加载
-        self.tableView.addInfiniteScrollingWithActionHandler { [weak self] () -> Void in
+        self.tableView.addInfiniteScrolling { [weak self] () -> Void in
             guard let sself = self else {
                 return
             }
             sself.loadNextPageTrigger.on(.Next())
         }
-        self.tableView.infiniteScrollingView.activityIndicatorViewStyle = .White
+        self.tableView.infiniteScrollingView.activityIndicatorViewStyle = .white
         
         //tableview行点击Observable
         self.tableView.selectSubject
@@ -81,7 +85,7 @@ class CCArticleTableViewController: ZXBaseViewController {//GADBannerViewDelegat
             .addDisposableTo(disposeBag)
         
         if (self.adPosition != nil) {
-            self.adView = CCADBanner(type: CCADBannerViewType.Search, rootViewController: self, completionBlock: { (succeed:Bool, errorInfo:[NSObject : AnyObject]!) -> Void in
+            self.adView = CCADBanner(type: CCADBannerViewType.Search, rootViewController: self, completionBlock: { (succeed:Bool, errorInfo:[AnyHashable: Any]!) -> Void in
                 
                 if succeed {
                     var rect = self.view.bounds

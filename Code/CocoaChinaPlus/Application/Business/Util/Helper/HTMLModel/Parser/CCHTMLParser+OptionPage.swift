@@ -11,7 +11,7 @@ import Ji
 
 extension CCHTMLParser {
     
-    func parsePage(urlString:String,result:(model:[CCArticleModel],nextURL:String?)->Void) {
+    func parsePage(_ urlString:String,result:@escaping (_ model:[CCArticleModel],_ nextURL:String?)->Void) {
         weak var weakSelf = self
         
         CCRequest(.GET, urlString).responseJi { (ji, error) -> Void in
@@ -24,7 +24,7 @@ extension CCHTMLParser {
     
     
     
-    private func parseNextPageURL(ji:Ji,currentURL:String) -> String? {
+    fileprivate func parseNextPageURL(_ ji:Ji,currentURL:String) -> String? {
         guard let nodes = ji.xPath("//div[@id='page']/a") else {
             return nil
         }
@@ -56,17 +56,17 @@ extension CCHTMLParser {
     }
     
     
-    private func optionPathOfURL(urlString:String) -> String {
+    fileprivate func optionPathOfURL(_ urlString:String) -> String {
         let str = urlString as NSString
         
         var count = 0
-        for var i = 0; i < str.length; i++ {
-            let temp = str.substringWithRange(NSMakeRange(i, 1))
+        for i in 0 ..< str.length {
+            let temp = str.substring(with: NSMakeRange(i, 1))
             if temp == "/" {
-                count++
+                count += 1
                 
                 if count >= 4 {
-                    return str.substringWithRange(NSMakeRange(0,i+1))
+                    return str.substring(with: NSMakeRange(0,i+1))
                 }
                 
             }
@@ -76,7 +76,7 @@ extension CCHTMLParser {
     }
     
     
-    private func parseArticle(ji: Ji) -> [CCArticleModel] {
+    fileprivate func parseArticle(_ ji: Ji) -> [CCArticleModel] {
         guard let nodes = ji.xPath("//div[@class='clearfix']") else {
             return [CCArticleModel]()
         }

@@ -12,14 +12,14 @@ import ZXKit
 
 class ZXBaseViewController: UIViewController{
     
-    var navURL = NSURL()
+    var navURL = URL()
     var navQuery = Dictionary<String,String>()
     
     convenience init(){
-        self.init(navigatorURL: NSURL(), query: Dictionary<String, String>())
+        self.init(navigatorURL: URL(), query: Dictionary<String, String>())
     }
     
-    required init(navigatorURL URL: NSURL,query:Dictionary<String,String>) {
+    required init(navigatorURL URL: Foundation.URL,query:Dictionary<String,String>) {
         self.navURL = URL
         self.navQuery = query
         super.init(nibName: nil, bundle: nil)
@@ -32,17 +32,17 @@ class ZXBaseViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.blackColor()
+        self.view.backgroundColor = UIColor.black
         self.automaticallyAdjustsScrollViewInsets = false
-        self.edgesForExtendedLayout = UIRectEdge.None
+        self.edgesForExtendedLayout = UIRectEdge()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return UIStatusBarStyle.LightContent
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return UIStatusBarStyle.lightContent
     }
     
     deinit {

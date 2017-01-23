@@ -16,7 +16,7 @@ import ZXKit
 class CCPHomeViewController: ZXBaseViewController {
     
     //RxSwift资源回收包
-    private let disposeBag = DisposeBag()
+    fileprivate let disposeBag = DisposeBag()
     
     //视图
     lazy var pagingView: ZXPagingView = {
@@ -41,12 +41,16 @@ class CCPHomeViewController: ZXBaseViewController {
     var tableArray: CCPTableArray?
     
     //初始方法
-    required init(navigatorURL URL: NSURL, query: Dictionary<String, String>) {
+    required init(navigatorURL URL: Foundation.URL, query: Dictionary<String, String>) {
         super.init(navigatorURL: URL, query: query)
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+
+    required init(navigatorURL URL: NSURL, query: Dictionary<String, String>) {
+        fatalError("init(navigatorURL:query:) has not been implemented")
     }
     
     override func viewDidLoad() {
@@ -70,20 +74,20 @@ class CCPHomeViewController: ZXBaseViewController {
         self.loadData()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         MobClick.beginLogPageView("首页")
 
         self.pagingView.frame = self.view.bounds
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         self.optionView.hidden = false
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         MobClick.endLogPageView("首页")
         
@@ -96,8 +100,8 @@ class CCPHomeViewController: ZXBaseViewController {
 extension CCPHomeViewController {
     
     //讀取資料內容
-    private func loadData() {
-        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+    fileprivate func loadData() {
+        MBProgressHUD.showAdded(to: self.view, animated: true)
         
         CCHTMLModelHandler.sharedHandler
             .handleHomePage()
@@ -115,9 +119,9 @@ extension CCPHomeViewController {
     }
     
     //搜尋按鈕
-    private func searchButton() -> UIBarButtonItem {
-        let searchButton = UIButton(frame: CGRectMake(0, 0, 44, 44))
-        searchButton.setImage(R.image.nav_search, forState: .Normal)
+    fileprivate func searchButton() -> UIBarButtonItem {
+        let searchButton = UIButton(frame: CGRect(x: 0, y: 0, width: 44, height: 44))
+        searchButton.setImage(R.image.nav_search, for: UIControlState())
         searchButton
             .rx_tap
             .subscribeNext { _ in
@@ -133,15 +137,15 @@ extension CCPHomeViewController {
 // MARK: ZXOptionViewDelegate
 extension CCPHomeViewController: ZXOptionViewDelegate {
     
-    func numberOfOptionsInOptionView(optionView: ZXOptionView) -> Int {
+    func numberOfOptionsInOptionView(_ optionView: ZXOptionView) -> Int {
         return self.tableArray?.tableViews.count ?? 0
     }
     
-    func optionView(optionView: ZXOptionView, itemSizeAtIndex index: Int) -> CGSize {
+    func optionView(_ optionView: ZXOptionView, itemSizeAtIndex index: Int) -> CGSize {
         return CGSizeMake(80, ZXNavBarSize().height)
     }
     
-    func optionView(optionView: ZXOptionView, cellConfiguration cellPoint: ZXOptionViewCellPoint) {
+    func optionView(_ optionView: ZXOptionView, cellConfiguration cellPoint: ZXOptionViewCellPoint) {
         guard let tableArray = self.tableArray else {
             return
         }
@@ -149,7 +153,7 @@ extension CCPHomeViewController: ZXOptionViewDelegate {
         cell.textLabel.text = tableArray.homeModel.options[cell.index].title
     }
     
-    func optionView(optionView: ZXOptionView, didSelectOptionAtIndex index: Int) {
+    func optionView(_ optionView: ZXOptionView, didSelectOptionAtIndex index: Int) {
         self.pagingView.currentIndex = index
         guard let tableArray = self.tableArray else {
             return
@@ -162,11 +166,11 @@ extension CCPHomeViewController: ZXOptionViewDelegate {
 // MARK: ZXPagingViewDelegate
 extension CCPHomeViewController: ZXPagingViewDelegate {
     
-    func numberOfItemsInPagingView(pagingView: ZXPagingView) -> Int {
+    func numberOfItemsInPagingView(_ pagingView: ZXPagingView) -> Int {
         return self.tableArray?.tableViews.count ?? 0
     }
     
-    func pagingView(pagingView: ZXPagingView, cellForPageAtIndex index: Int) -> ZXPage {
+    func pagingView(_ pagingView: ZXPagingView, cellForPageAtIndex index: Int) -> ZXPage {
         let cell = pagingView.dequeueReusablePageWithReuseIdentifier("cocoachina", forIndex: index) as! CCPHomePage
         
         if let tableArray = self.tableArray {
@@ -176,7 +180,7 @@ extension CCPHomeViewController: ZXPagingViewDelegate {
         return cell
     }
     
-    func pagingView(pagingView: ZXPagingView, movingFloatIndex floatIndex: Float) {
+    func pagingView(_ pagingView: ZXPagingView, movingFloatIndex floatIndex: Float) {
         if self.optionView.type == .Tap {
             return
         }
@@ -184,13 +188,13 @@ extension CCPHomeViewController: ZXPagingViewDelegate {
     }
     
     
-    func pagingView(pagingView: ZXPagingView, didMoveToPageAtIndex index: Int) {
+    func pagingView(_ pagingView: ZXPagingView, didMoveToPageAtIndex index: Int) {
         self.tableArray?.reloadDataAtIndexIfEmpty(index)
         self.optionView.type = .Slider
     }
     
     
-    func pagingView(pagingView: ZXPagingView, willMoveToPageAtIndex index: Int) {
+    func pagingView(_ pagingView: ZXPagingView, willMoveToPageAtIndex index: Int) {
     }
     
 }
@@ -198,23 +202,23 @@ extension CCPHomeViewController: ZXPagingViewDelegate {
 // MARK: ZXGuideViewControllerDelegate
 extension CCPHomeViewController: ZXGuideViewControllerDelegate {
     
-    func numberOfPagesInGuideView(guideView: ZXGuideViewController) -> NSInteger {
+    func numberOfPagesInGuideView(_ guideView: ZXGuideViewController) -> NSInteger {
         return 4
     }
     
-    func guideView(guideView: ZXGuideViewController, cellForPageAtIndex index: NSInteger) -> UIView {
+    func guideView(_ guideView: ZXGuideViewController, cellForPageAtIndex index: NSInteger) -> UIView {
         let frame = guideView.view.frame
         let view = UIView(frame: frame)
         view.backgroundColor = UIColor.blackColor()
         return view;
     }
     
-    func guideView(guideView: ZXGuideViewController, imageAtIndex index: NSInteger) -> UIImageView {
+    func guideView(_ guideView: ZXGuideViewController, imageAtIndex index: NSInteger) -> UIImageView {
         
-        var frame = CGRectZero
-        frame.size = CGSizeMake(473 / 2, 969 / 2);
+        var frame = CGRect.zero
+        frame.size = CGSize(width: 473 / 2, height: 969 / 2);
         let center = self.guideView(guideView, pointCenterAtIndex: index)
-        frame.origin = CGPointMake(center.x - frame.size.width / 2, center.y - frame.size.height / 2);
+        frame.origin = CGPoint(x: center.x - frame.size.width / 2, y: center.y - frame.size.height / 2);
         
         var image = R.image.guide_page_4
         switch (index) {
@@ -234,7 +238,7 @@ extension CCPHomeViewController: ZXGuideViewControllerDelegate {
         return imageView
     }
     
-    func guideView(guideView: ZXGuideViewController, labelAtIndex index: NSInteger) -> UILabel {
+    func guideView(_ guideView: ZXGuideViewController, labelAtIndex index: NSInteger) -> UILabel {
         var str = ""
         switch (index) {
         case 0:
@@ -263,18 +267,18 @@ extension CCPHomeViewController: ZXGuideViewControllerDelegate {
         return label
     }
     
-    func guideView(guideView: ZXGuideViewController, pointCenterAtIndex index: NSInteger) -> CGPoint {
-        var point = CGPointMake(ZXScreenWidth() / 2, ZXScreenHight() / 2);
+    func guideView(_ guideView: ZXGuideViewController, pointCenterAtIndex index: NSInteger) -> CGPoint {
+        var point = CGPoint(x: ZXScreenWidth() / 2, y: ZXScreenHight() / 2);
         switch (index) {
         case 0...3:
-            point = CGPointMake(point.x, point.y - 50);
+            point = CGPoint(x: point.x, y: point.y - 50);
         default:
             break;
         }
         return point
     }
     
-    func didClickEnterButtonInGuideView(guideView: ZXGuideViewController) {
+    func didClickEnterButtonInGuideView(_ guideView: ZXGuideViewController) {
         Defaults[.isGuideShowed] = true
     }
     

@@ -16,14 +16,14 @@ class ZXTabBarController: UITabBarController,UITabBarControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.selectedIndex = 0
-        self.tabBar.barTintColor = UIColor.blackColor()
+        self.tabBar.barTintColor = UIColor.black
         
         let homeVC = CCPHomeViewController()
         homeVC.tabBarItem = UITabBarItem(title: "首页", image: R.image.home, tag: 0)
         let nav_cc = ZXNavigationController(rootViewController: homeVC)
         
         
-        let bbsVC = CCPBBSViewController(navigatorURL: NSURL(string: "go/ccp/bbs")!, query: ["link":"http://www.cocoachina.com/bbs/3g/"])
+        let bbsVC = CCPBBSViewController(navigatorURL: URL(string: "go/ccp/bbs")!, query: ["link":"http://www.cocoachina.com/bbs/3g/"])
         bbsVC.tabBarItem = UITabBarItem(title: "论坛", image: R.image.bbs, tag: 1)
         let nav_bbs = ZXNavigationController(rootViewController: bbsVC)
         

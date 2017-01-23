@@ -13,7 +13,7 @@ import ZXKit
 class CCPBBSEditionParser {
     
     //解析版面文章
-    class func parserEdition(urlString: String, result: (model: CCPBBSEditionModel) -> Void) {
+    class func parserEdition(_ urlString: String, result: @escaping (_ model: CCPBBSEditionModel) -> Void) {
         CCRequest(.GET, urlString).responseJi { (ji, error) -> Void in
             guard let list = ji?.xPath("//li[@class='articlelist clearfix']") else {
                 return
@@ -81,7 +81,7 @@ class CCPBBSEditionModel {
         self.pagenext = pagenext
     }
     
-    func append(model: CCPBBSEditionModel) -> Void {
+    func append(_ model: CCPBBSEditionModel) -> Void {
         self.posts += model.posts
         self.pagenext = model.pagenext
     }

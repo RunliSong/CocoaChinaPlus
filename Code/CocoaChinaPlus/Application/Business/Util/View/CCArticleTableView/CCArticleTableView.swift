@@ -22,24 +22,24 @@ class CCArticleTableView: UITableView,UITableViewDelegate {
     var selectSubject = PublishSubject<CCArticleModel>()
     
     //RxSwift资源回收包
-    private let disposeBag = DisposeBag()
+    fileprivate let disposeBag = DisposeBag()
     //文章数组Variable
-    private let articles = Variable([CCArticleModel]())
+    fileprivate let articles = Variable([CCArticleModel]())
     //数据源
-    private let tableViewDataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, CCArticleModel>>()
+    fileprivate let tableViewDataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, CCArticleModel>>()
     
     
     override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: style)
         
         self.backgroundColor = ZXColor(0x000000, alpha: 0.8)
-        self.separatorStyle  = .None
+        self.separatorStyle  = .none
 
         self.subscribes()
     }
     
     convenience init(forceHighlight:Bool) {
-        self.init(frame:CGRectZero,style:.Plain)
+        self.init(frame:CGRect.zero,style:.plain)
         self.forceHighlight = forceHighlight
     }
     
@@ -48,7 +48,7 @@ class CCArticleTableView: UITableView,UITableViewDelegate {
      
      - parameter models: 一组文章model
      */
-    func append(models:[CCArticleModel]) {
+    func append(_ models:[CCArticleModel]) {
         if models.count == 0 {
             if self.articles.value.count == 0 {
                 MBProgressHUD.showText("没找到...")
@@ -69,7 +69,7 @@ class CCArticleTableView: UITableView,UITableViewDelegate {
     /**
      重新加载
      */
-    func reload(models:[CCArticleModel]) {
+    func reload(_ models:[CCArticleModel]) {
         self.clean()
         self.append(models)
     }
@@ -82,14 +82,14 @@ class CCArticleTableView: UITableView,UITableViewDelegate {
     }
     
     
-    private func subscribes() {
+    fileprivate func subscribes() {
         //代理设置
         self.rx_setDelegate(self)
             .addDisposableTo(disposeBag)
         
         //TableViewCell设置
         tableViewDataSource.cellFactory = {[unowned self] (tv, ip, model: CCArticleModel) in
-            var cell = tv.dequeueReusableCellWithIdentifier("CCArticleTableViewCell")
+            var cell = tv.dequeueReusableCell(withIdentifier: "CCArticleTableViewCell")
             if cell == nil {
                 cell = CCArticleTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "CCArticleTableViewCell")
             }
@@ -99,7 +99,7 @@ class CCArticleTableView: UITableView,UITableViewDelegate {
         
         //tableView中Cell点击Observable
         self.rx_itemSelected
-            .subscribeNext {[weak self] (indexPath:NSIndexPath) -> Void in
+            .subscribeNext {[weak self] (indexPath:IndexPath) -> Void in
                 guard let sself = self else {
                     return
                 }
@@ -128,7 +128,7 @@ class CCArticleTableView: UITableView,UITableViewDelegate {
             .addDisposableTo(self.disposeBag)
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
     

@@ -16,7 +16,7 @@ import ZXKit
 //MARK: - Alamofire - Request
 extension Request {
     
-    func responseJi(completionJi:(ji:Ji?,error:ErrorType?) -> Void) -> Self {
+    func responseJi(_ completionJi:@escaping (_ ji:Ji?,_ error:Error?) -> Void) -> Self {
         
         return response(completionHandler: { (request, response, data, error) -> Void in
             guard error == nil && data != nil else {
@@ -33,7 +33,7 @@ extension Request {
 
 
 public func CCRequest(
-    method: Alamofire.Method ,
+    _ method: Alamofire.Method ,
     _ URLString: URLStringConvertible,
     cheat:Bool = true,
     parameters: [String: AnyObject]? = nil,
@@ -51,14 +51,14 @@ public func CCRequest(
 }
 
 extension MBProgressHUD {
-    static func showText(text:String) {
-        let view = UIApplication.sharedApplication().keyWindow
-        let hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
+    static func showText(_ text:String) {
+        let view = UIApplication.shared.keyWindow
+        let hud = MBProgressHUD.showAdded(to: view!, animated: true)
         hud.labelText = text
-        hud.mode = MBProgressHUDMode.Text
+        hud.mode = MBProgressHUDMode.text
         hud.color = UIColor.assistColor()
         hud.margin = 10.0
-        hud.labelColor = UIColor.whiteColor()
+        hud.labelColor = UIColor.white
         hud.removeFromSuperViewOnHide = true
         // 1秒之后再消失
         hud.hide(true, afterDelay: 1)
@@ -68,7 +68,7 @@ extension MBProgressHUD {
 
 extension Anchorable {
     
-    func anchorAndFillEdge(edge: Edge, xPad: CGFloat, yPad: CGFloat, otherSizeTupling: CGFloat) {
+    func anchorAndFillEdge(_ edge: Edge, xPad: CGFloat, yPad: CGFloat, otherSizeTupling: CGFloat) {
         
         var otherSize :CGFloat = 0.0
         
@@ -92,23 +92,23 @@ extension Anchorable {
 
 extension UILabel {
     
-    func anchorInCornerWithAutoSize(corner: Neon.Corner, xPad: CGFloat, yPad: CGFloat) {
+    func anchorInCornerWithAutoSize(_ corner: Neon.Corner, xPad: CGFloat, yPad: CGFloat) {
         
-        let size = self._boundingRectWithSize(CGSize(width: CGFloat.max, height: CGFloat.max))
+        let size = self._boundingRectWithSize(CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude))
         self.anchorInCorner(corner, xPad: xPad, yPad: yPad, width: size.width, height: size.height)
     }
     
     
-    private func _boundingRectWithSize(size: CGSize) -> CGSize{
+    fileprivate func _boundingRectWithSize(_ size: CGSize) -> CGSize{
         guard self.text != nil else {
-            return CGSizeZero
+            return CGSize.zero
         }
         
         let text = self.text! as NSString
-        let options = [NSStringDrawingOptions.TruncatesLastVisibleLine,NSStringDrawingOptions.UsesLineFragmentOrigin,NSStringDrawingOptions.UsesFontLeading] as NSStringDrawingOptions
+        let options = [NSStringDrawingOptions.truncatesLastVisibleLine,NSStringDrawingOptions.usesLineFragmentOrigin,NSStringDrawingOptions.usesFontLeading] as NSStringDrawingOptions
         let attributes = [NSFontAttributeName :  self.font]
         
-        return text.boundingRectWithSize(size, options: options, attributes: attributes, context: nil).size
+        return text.boundingRect(with: size, options: options, attributes: attributes, context: nil).size
     }
 }
 

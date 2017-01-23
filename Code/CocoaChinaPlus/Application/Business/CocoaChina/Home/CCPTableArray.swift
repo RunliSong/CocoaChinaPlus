@@ -16,12 +16,12 @@ import Neon
 class CCPTableArray: NSObject {
 
     //RxSwift资源回收包
-    private let disposeBag = DisposeBag()
+    fileprivate let disposeBag = DisposeBag()
     
     //加载下一页触发器
-    private var loadNextPageTriggers = [PublishSubject<Void>]()
+    fileprivate var loadNextPageTriggers = [PublishSubject<Void>]()
     
-    private(set) var tableViews = [CCArticleTableView]()
+    fileprivate(set) var tableViews = [CCArticleTableView]()
     
     //private
     var homeModel: CCPHomeModel
@@ -39,7 +39,7 @@ class CCPTableArray: NSObject {
             let table = CCArticleTableView()
             table.tag = i
             
-            table.addPullToRefreshWithActionHandler({ () -> Void in
+            table.addPullToRefresh(actionHandler: { () -> Void in
                 self.reloadDataOfTable(table)
             })
             
@@ -54,14 +54,14 @@ class CCPTableArray: NSObject {
                 view.reloadData()
                 self.tableViews[0].tableHeaderView = view
             } else {
-                table.addInfiniteScrollingWithActionHandler({ [weak self] () -> Void in
+                table.addInfiniteScrolling(actionHandler: { [weak self] () -> Void in
                     guard let sself = self else {
                         return
                     }
                     
                     sself.loadNextPageTriggers[table.tag].on(.Next())
                 })
-                table.infiniteScrollingView.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.White
+                table.infiniteScrollingView.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.white
             }
             
             table.selectSubject.subscribeNext({ (article) -> Void in
@@ -70,19 +70,19 @@ class CCPTableArray: NSObject {
         }
     }
     
-    func reloadDataAtIndexIfEmpty(index: Int) {
+    func reloadDataAtIndexIfEmpty(_ index: Int) {
         guard self.tableViews[index].isEmpty() == true else {
             return
         }
         self.reloadDataOfTable(self.tableViews[index])
     }
     
-    func reloadDataAtIndex(index: Int) {
+    func reloadDataAtIndex(_ index: Int) {
         self.reloadDataOfTable(self.tableViews[index])
     }
     
-    private func reloadDataOfTable(table: CCArticleTableView) {
-        MBProgressHUD.showHUDAddedTo(table, animated: true)
+    fileprivate func reloadDataOfTable(_ table: CCArticleTableView) {
+        MBProgressHUD.showAdded(to: table, animated: true)
         let index = table.tag
         let urlString = self.urlStringAtIndex(index)
         
@@ -123,7 +123,7 @@ extension CCPTableArray {
     
     :returns: 数据获取的URL
     */
-    private func urlStringAtIndex(index: Int) -> String {
+    fileprivate func urlStringAtIndex(_ index: Int) -> String {
         return self.homeModel.options[index].urlString
     }
     
@@ -132,14 +132,14 @@ extension CCPTableArray {
 //MARK: 
 extension CCPTableArray: ZXCircleViewDelegate {
     
-    func numberOfItemsInCircleView(circleView: ZXCircleView) -> Int {
+    func numberOfItemsInCircleView(_ circleView: ZXCircleView) -> Int {
         return self.homeModel.banners.count
     }
     
-    func circleView(circleView: ZXCircleView, configureCell cellRef: ZXCircleViewCellRef) {
+    func circleView(_ circleView: ZXCircleView, configureCell cellRef: ZXCircleViewCellRef) {
         let cell = cellRef.memory
         
-        func modelFrom(cell: ZXCircleViewCell) -> CCArticleModel? {
+        func modelFrom(_ cell: ZXCircleViewCell) -> CCArticleModel? {
             guard let cellIndex = cell.index else {
                 return nil
             }
@@ -149,7 +149,7 @@ extension CCPTableArray: ZXCircleViewDelegate {
         guard
             let model = modelFrom(cell),
             let urlString = model.imageURL,
-            let url = NSURL(string: urlString)
+            let url = URL(string: urlString)
             else {
                 print("資料缺失")
                 return
@@ -159,7 +159,7 @@ extension CCPTableArray: ZXCircleViewDelegate {
         cell.titleLabel.text = model.title
     }
     
-    func circleView(circleView: ZXCircleView, didSelectedCellAtIndex index: Int) {
+    func circleView(_ circleView: ZXCircleView, didSelectedCellAtIndex index: Int) {
         
         //model
         let model = self.homeModel.banners[index]

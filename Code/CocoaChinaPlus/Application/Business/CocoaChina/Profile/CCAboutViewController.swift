@@ -10,14 +10,18 @@ import UIKit
 
 class CCAboutViewController: ZXBaseViewController {
 
-    private var scrollView:UIScrollView!
+    fileprivate var scrollView:UIScrollView!
     
-    required init(navigatorURL URL: NSURL, query: Dictionary<String, String>) {
+    required init(navigatorURL URL: Foundation.URL, query: Dictionary<String, String>) {
         super.init(navigatorURL: URL, query: query)
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    required init(navigatorURL URL: NSURL, query: Dictionary<String, String>) {
+        fatalError("init(navigatorURL:query:) has not been implemented")
     }
     
     override func viewDidLoad() {
@@ -29,7 +33,7 @@ class CCAboutViewController: ZXBaseViewController {
         
         let imageview = UIImageView(image: R.image.about)
         imageview.frame = self.scrollView.bounds
-        imageview.autoresizingMask = UIViewAutoresizing.FlexibleHeight
+        imageview.autoresizingMask = UIViewAutoresizing.flexibleHeight
         self.scrollView.addSubview(imageview)
     }
 }

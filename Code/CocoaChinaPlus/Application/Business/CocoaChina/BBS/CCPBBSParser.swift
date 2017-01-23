@@ -16,7 +16,7 @@ private let baseURL = "http://www.cocoachina.com/bbs/3g"
 class CCPBBSParser {
     
     //解析
-    class func parserBBS(result: (model: CCPBBSModel) -> Void) {
+    class func parserBBS(_ result: @escaping (_ model: CCPBBSModel) -> Void) {
         
         CCRequest(.GET, baseURL).responseJi { (ji, error) -> Void in
             guard let nodes = ji?.xPath("//li[@class='articlelist clearfix']") else {

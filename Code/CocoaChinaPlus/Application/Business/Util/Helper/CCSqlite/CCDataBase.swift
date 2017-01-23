@@ -19,19 +19,19 @@ class CCDataBase: NSObject {
     }()
     
     
-    private(set) var tableManager : CCTableManager!
+    fileprivate(set) var tableManager : CCTableManager!
     
-    private(set) var connection : Connection!
+    fileprivate(set) var connection : Connection!
     
     override init() {
         super.init()
         do{
             //获取路径
-            let path = ZXPathForApplicationSupportResource(NSBundle.mainBundle().bundleIdentifier!)
+            let path = ZXPathForApplicationSupportResource(Bundle.mainBundle().bundleIdentifier!)
             
             //创建文件
-            if !NSFileManager.defaultManager().fileExistsAtPath(path) {
-                try NSFileManager.defaultManager().createDirectoryAtPath(
+            if !FileManager.defaultManager().fileExistsAtPath(path) {
+                try FileManager.defaultManager().createDirectoryAtPath(
                     path, withIntermediateDirectories: true, attributes: nil
                 )
             }

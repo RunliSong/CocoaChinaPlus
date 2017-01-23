@@ -16,17 +16,17 @@ class CCArticleTableViewCell: CCPTableViewCell {
     //标志cell是否有图片
     var hasImage:Bool = false
     
-    private var picView:UIImageView!
+    fileprivate var picView:UIImageView!
     
-    private var picMaskView:UIView!
+    fileprivate var picMaskView:UIView!
     
-    private var titleLabel:UILabel!
+    fileprivate var titleLabel:UILabel!
     
-    private var postDateLabel:UILabel!
+    fileprivate var postDateLabel:UILabel!
     
-    private var watchLabel:UILabel!
+    fileprivate var watchLabel:UILabel!
     
-    private var bottomLine:UIImageView!
+    fileprivate var bottomLine:UIImageView!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -89,16 +89,16 @@ class CCArticleTableViewCell: CCPTableViewCell {
         super.init(coder: aDecoder)
     }
     
-    func configure(model:CCArticleModel) {
+    func configure(_ model:CCArticleModel) {
 
         self.configure(model, forceHighlight: false)
     }
     
-    func configure(model:CCArticleModel, forceHighlight:Bool) {
+    func configure(_ model:CCArticleModel, forceHighlight:Bool) {
         urlString = model.linkURL
         if model.imageURL != nil {
             self.hasImage = true
-            picView.kf_setImageWithURL(NSURL(string:model.imageURL!)!)
+            picView.kf_setImageWithURL(URL(string:model.imageURL!)!)
         }else {
             self.hasImage = false
         }
@@ -118,7 +118,7 @@ class CCArticleTableViewCell: CCPTableViewCell {
         }
     }
     
-    func highlightCell(highlight:Bool) {
+    func highlightCell(_ highlight:Bool) {
         if highlight {
             self.titleLabel.textColor = UIColor.whiteColor()
             self.picMaskView.hidden = true

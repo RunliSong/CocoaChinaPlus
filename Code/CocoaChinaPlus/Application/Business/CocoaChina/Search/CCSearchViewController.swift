@@ -13,27 +13,31 @@ import Alamofire
 
 class CCSearchViewController: CCArticleTableViewController {
     //搜索条
-    private var searchfiled:UISearchBar!
+    fileprivate var searchfiled:UISearchBar!
     //取消按钮
-    private var cancelButton:UIButton!
+    fileprivate var cancelButton:UIButton!
     //RxSwift资源回收包
-    private let disposeBag = DisposeBag()
+    fileprivate let disposeBag = DisposeBag()
     
     
-    required init(navigatorURL URL: NSURL, query: Dictionary<String, String>) {
+    required init(navigatorURL URL: Foundation.URL, query: Dictionary<String, String>) {
         super.init(navigatorURL: URL, query: query)
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    required init(navigatorURL URL: NSURL, query: Dictionary<String, String>) {
+        fatalError("init(navigatorURL:query:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.edgesForExtendedLayout = UIRectEdge.None
+        self.edgesForExtendedLayout = UIRectEdge()
         
-        self.cancelButton = UIButton(frame: CGRectMake(0, 0, 44, 44))
-        self.cancelButton.setImage(R.image.nav_cancel, forState: UIControlState.Normal)
+        self.cancelButton = UIButton(frame: CGRect(x: 0, y: 0, width: 44, height: 44))
+        self.cancelButton.setImage(R.image.nav_cancel, for: UIControlState())
         self.navigationItem.rightBarButtonItemFixedSpace(UIBarButtonItem(customView: cancelButton))
         
         self.searchfiled = UISearchBar()
@@ -44,7 +48,7 @@ class CCSearchViewController: CCArticleTableViewController {
         self.subscribes()
     }
     
-    private func subscribes() {
+    fileprivate func subscribes() {
         //取消按钮点击Observable
         self.cancelButton.rx_tap
             .subscribeNext { [weak self] x in

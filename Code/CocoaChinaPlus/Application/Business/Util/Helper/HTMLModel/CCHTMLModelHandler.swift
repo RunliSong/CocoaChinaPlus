@@ -15,7 +15,7 @@ class CCHTMLModelHandler: NSObject {
     
     let disposeBag = DisposeBag()
     
-    private let parser = CCHTMLParser()
+    fileprivate let parser = CCHTMLParser()
 }
 
 
@@ -35,7 +35,7 @@ extension CCHTMLModelHandler {
 // MARK: - 搜索页
 extension CCHTMLModelHandler {
     
-    func handleSearchPage(query:String, loadNextPageTrigger trigger:PublishSubject<Void>) -> PublishSubject<[CCArticleModel]> {
+    func handleSearchPage(_ query:String, loadNextPageTrigger trigger:PublishSubject<Void>) -> PublishSubject<[CCArticleModel]> {
         
         struct Holder {
             static var nextURL = ""
@@ -77,14 +77,14 @@ extension CCHTMLModelHandler {
      
      - returns: 搜索页面URL
      */
-    private func searchFullURL(keyword:String) -> String {
+    fileprivate func searchFullURL(_ keyword:String) -> String {
         return "http://www.cocoachina.com/cms/plus/search.php?kwtype=0&keyword=\(self.URLEscape(keyword))&searchtype=titlekeyword"
     }
     
-    private func URLEscape(pathSegment: String) -> String {
+    fileprivate func URLEscape(_ pathSegment: String) -> String {
         var seg = pathSegment
-        seg = seg.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-        seg = seg.stringByReplacingOccurrencesOfString(" ", withString: "+")
+        seg = seg.trimmingCharacters(in: CharacterSet.whitespaces)
+        seg = seg.replacingOccurrences(of: " ", with: "+")
         return seg
     }
     
@@ -93,7 +93,7 @@ extension CCHTMLModelHandler {
 // MARK: - 类目页
 extension CCHTMLModelHandler {
     
-    func handleOptionPage(urlString:String, loadNextPageTrigger trigger:PublishSubject<Void>) ->PublishSubject<[CCArticleModel]> {
+    func handleOptionPage(_ urlString:String, loadNextPageTrigger trigger:PublishSubject<Void>) ->PublishSubject<[CCArticleModel]> {
         struct Holder {
             static var nextURLDic = [String : String]()
         }
