@@ -14,11 +14,11 @@ extension CCHTMLParser {
     func parsePage(_ urlString:String,result:@escaping (_ model:[CCArticleModel],_ nextURL:String?)->Void) {
         weak var weakSelf = self
         
-        CCRequest(.GET, urlString).responseJi { (ji, error) -> Void in
+        _ = CCRequest(.get, urlString).responseJi { (ji, error) -> Void in
             
             let nextPageURL = weakSelf!.parseNextPageURL(ji!, currentURL: urlString)
             let article = weakSelf!.parseArticle(ji!)
-            result(model: article, nextURL: nextPageURL)
+            result(article, nextPageURL)
         }
     }
     

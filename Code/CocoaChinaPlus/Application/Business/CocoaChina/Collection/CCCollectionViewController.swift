@@ -27,10 +27,7 @@ class CCCollectionViewController: CCArticleTableViewController {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    required init(navigatorURL URL: NSURL, query: Dictionary<String, String>) {
-        fatalError("init(navigatorURL:query:) has not been implemented")
-    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

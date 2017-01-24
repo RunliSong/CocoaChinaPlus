@@ -8,7 +8,6 @@
 
 import UIKit
 import RxSwift
-import CCAD
 //import GoogleMobileAds
 
 class CCArticleTableViewController: ZXBaseViewController {//GADBannerViewDelegate
@@ -22,11 +21,6 @@ class CCArticleTableViewController: ZXBaseViewController {//GADBannerViewDelegat
     //加载下一页触发器
     let loadNextPageTrigger = PublishSubject<Void>()
     
-    /// 广告位位置枚举
-    fileprivate var adPosition:CCADBannerViewType?
-    
-    fileprivate var adView: CCADBanner?
-    
     
     required init(navigatorURL URL: Foundation.URL, query: Dictionary<String, String>) {
         super.init(navigatorURL: URL, query: query)
@@ -39,10 +33,10 @@ class CCArticleTableViewController: ZXBaseViewController {//GADBannerViewDelegat
         let adposStr = query["adpos"]
         if (adposStr != nil && Int(adposStr!) != nil) {
             if adposStr! == "1" {
-                self.adPosition = CCADBannerViewType.Search
+                self.adPosition = CCADBannerViewType.search
             }
         }
-        if self.adPosition == CCADBannerViewType.Search {
+        if self.adPosition == CCADBannerViewType.search {
             print("invoke");
         }
     }
@@ -51,9 +45,6 @@ class CCArticleTableViewController: ZXBaseViewController {//GADBannerViewDelegat
         fatalError("init(coder:) has not been implemented")
     }
 
-    required init(navigatorURL URL: NSURL, query: Dictionary<String, String>) {
-        fatalError("init(navigatorURL:query:) has not been implemented")
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,7 +57,7 @@ class CCArticleTableViewController: ZXBaseViewController {//GADBannerViewDelegat
             guard let sself = self else {
                 return
             }
-            sself.loadNextPageTrigger.on(.Next())
+            sself.loadNextPageTrigger.on(.next())
         }
         self.tableView.infiniteScrollingView.activityIndicatorViewStyle = .white
         

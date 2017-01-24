@@ -8,7 +8,7 @@
 
 import Foundation
 import SQLite
-import ZXKit
+import AppBaseKit
 
 let CCDB = CCDataBase.sharedDB
 
@@ -27,12 +27,12 @@ class CCDataBase: NSObject {
         super.init()
         do{
             //获取路径
-            let path = ZXPathForApplicationSupportResource(Bundle.mainBundle().bundleIdentifier!)
+            let path = AppPathForApplicationSupportResource(relativePath: Bundle.main.bundleIdentifier!)
             
             //创建文件
-            if !FileManager.defaultManager().fileExistsAtPath(path) {
-                try FileManager.defaultManager().createDirectoryAtPath(
-                    path, withIntermediateDirectories: true, attributes: nil
+            if !FileManager.default.fileExists(atPath: path) {
+                try FileManager.default.createDirectory(
+                    atPath: path, withIntermediateDirectories: true, attributes: nil
                 )
             }
             
@@ -42,7 +42,7 @@ class CCDataBase: NSObject {
             //建立数据库表
             self.tableManager = CCTableManager(connection: self.connection)
         }catch {
-            println("创建数据库失败！原因: \(error)")
+            print("创建数据库失败！原因: \(error)")
         }
     }
 }

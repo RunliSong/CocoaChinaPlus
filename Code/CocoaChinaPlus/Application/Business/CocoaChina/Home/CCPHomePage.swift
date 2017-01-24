@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import ZXKit
 
 // MARK: CCPHomePage
 class CCPHomePage: ZXPage {

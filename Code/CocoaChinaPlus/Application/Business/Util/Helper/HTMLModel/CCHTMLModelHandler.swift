@@ -100,28 +100,27 @@ extension CCHTMLModelHandler {
         
         let psubject = PublishSubject<[CCArticleModel]>()
         
-        
-        trigger.subscribeNext {[weak self] _ in
-            
+        trigger.bindNext { [weak self] _  in
             guard let sself = self else {
                 return
             }
             
+            guard let url = Holder.nextURLDic[urlString] else {
+                return psubject.on(.next([CCArticleModel]()))
+            }
             
-            guard Holder.nextURLDic[urlString]?.characters.count > 0  else {
-                return psubject.on(.Next([CCArticleModel]()))
+            guard url.characters.count > 0  else {
+                return psubject.on(.next([CCArticleModel]()))
             }
             
             sself.parser.parsePage(Holder.nextURLDic[urlString]!, result: { (model, nextURL) -> Void in
-                psubject.on(.Next(model))
+                psubject.on(.next(model))
                 Holder.nextURLDic[urlString] = nextURL != nil ? nextURL! : ""
             })
-            
-            }.addDisposableTo(self.disposeBag)
-        
+        }.addDisposableTo(self.disposeBag)
         
         self.parser.parsePage(urlString) { (model, nextURL) -> Void in
-            psubject.on(.Next(model))
+            psubject.on(.next(model))
             Holder.nextURLDic[urlString] = nextURL != nil ? nextURL! : ""
         }
         

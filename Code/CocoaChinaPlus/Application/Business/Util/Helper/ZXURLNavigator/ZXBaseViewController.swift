@@ -8,15 +8,14 @@
 
 import Foundation
 import UIKit
-import ZXKit
 
 class ZXBaseViewController: UIViewController{
     
-    var navURL = URL()
+    var navURL = URL(string: "")
     var navQuery = Dictionary<String,String>()
     
     convenience init(){
-        self.init(navigatorURL: URL(), query: Dictionary<String, String>())
+        self.init(navigatorURL: URL(string: "")!, query: Dictionary<String, String>())
     }
     
     required init(navigatorURL URL: Foundation.URL,query:Dictionary<String,String>) {
@@ -46,6 +45,6 @@ class ZXBaseViewController: UIViewController{
     }
     
     deinit {
-        println("\(self.classForCoder)已正常释放!")
+        print("\(self.classForCoder)已正常释放!")
     }
 }

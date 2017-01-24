@@ -8,7 +8,6 @@
 
 import UIKit
 import MBProgressHUD
-import ZXKit
 
 // MARK: CCPBBSViewController
 class CCPBBSViewController: ZXBaseViewController {
@@ -16,7 +15,7 @@ class CCPBBSViewController: ZXBaseViewController {
     //UI
     fileprivate lazy var tableView: UITableView = {
         let newTableView = UITableView()
-        newTableView.backgroundColor = ZXColor(0x000000, alpha: 0.8)
+        newTableView.backgroundColor = UIColor(hex: 0x000000, alpha: 0.8)
         newTableView.delegate = self
         newTableView.dataSource = self
         newTableView.separatorStyle = .none
@@ -42,10 +41,6 @@ class CCPBBSViewController: ZXBaseViewController {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.setup()
-    }
-
-    required init(navigatorURL URL: NSURL, query: Dictionary<String, String>) {
-        fatalError("init(navigatorURL:query:) has not been implemented")
     }
     
     override func viewDidLoad() {

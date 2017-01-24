@@ -17,7 +17,4 @@
 //极光推送
 #import "APService.h"
 
-#import <CCAD/CCADBanner.h>
-#import <CCAD/CCADInterstitialService.h>
-
 #endif

@@ -10,8 +10,8 @@ import UIKit
 import SVPullToRefresh
 import MBProgressHUD
 import RxSwift
-import ZXKit
 import Neon
+import Kingfisher
 
 class CCPTableArray: NSObject {
 
@@ -50,7 +50,7 @@ class CCPTableArray: NSObject {
                 
                 let view = ZXCircleView()
                 view.circleDelegate = self
-                view.anchorToEdge(Edge.Top, padding: 0, width: ZXScreenWidth(), height: ZXScreenWidth() * 0.8)
+                view.anchorToEdge(Edge.top, padding: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.width * 0.8)
                 view.reloadData()
                 self.tableViews[0].tableHeaderView = view
             } else {
@@ -59,14 +59,14 @@ class CCPTableArray: NSObject {
                         return
                     }
                     
-                    sself.loadNextPageTriggers[table.tag].on(.Next())
+                    sself.loadNextPageTriggers[table.tag].on(.next())
                 })
                 table.infiniteScrollingView.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.white
             }
             
-            table.selectSubject.subscribeNext({ (article) -> Void in
+            table.selectSubject.bindNext({ (article:CCArticleModel) in
                 ZXOpenURL("go/ccp/article?identity=\(article.identity)")
-            }).addDisposableTo(disposeBag)
+            }).addDisposableTo(self.disposeBag)
         }
     }
     
@@ -89,26 +89,23 @@ class CCPTableArray: NSObject {
         if index > 0 {
             table.clean()
             
-            CCHTMLModelHandler.sharedHandler.handleOptionPage(urlString, loadNextPageTrigger: self.loadNextPageTriggers[table.tag]).subscribeNext({ (models) -> Void in
+            CCHTMLModelHandler.sharedHandler.handleOptionPage(urlString, loadNextPageTrigger: self.loadNextPageTriggers[table.tag]).bindNext({ (models:Array<CCArticleModel>) in
                 table.pullToRefreshView.stopAnimating()
                 table.append(models)
                 table.infiniteScrollingView.stopAnimating()
-                MBProgressHUD.hideHUDForView(table, animated: true)
-                
-            }).addDisposableTo(disposeBag)
-            
+                MBProgressHUD.hide(for: table, animated: true)
+            }).addDisposableTo(self.disposeBag)
         } else {
             
-            CCHTMLModelHandler.sharedHandler.handleHomePage().subscribeNext({ (homeModel) -> Void in
+            CCHTMLModelHandler.sharedHandler.handleHomePage().bindNext({ (homeModel:CCPHomeModel) in
                 table.reload(homeModel.page)
                 
                 table.pullToRefreshView.stopAnimating()
-                MBProgressHUD.hideHUDForView(table, animated: true)
+                MBProgressHUD.hide(for: table, animated: true)
                 
                 let view = table.tableHeaderView as! ZXCircleView
                 view.reloadData()
-            }).addDisposableTo(disposeBag)
-            
+            }).addDisposableTo(self.disposeBag)
         }
     }
     
@@ -132,12 +129,12 @@ extension CCPTableArray {
 //MARK: 
 extension CCPTableArray: ZXCircleViewDelegate {
     
-    func numberOfItemsInCircleView(_ circleView: ZXCircleView) -> Int {
+    func numberOfItemsInCircleView(circleView: ZXCircleView) -> Int {
         return self.homeModel.banners.count
     }
     
-    func circleView(_ circleView: ZXCircleView, configureCell cellRef: ZXCircleViewCellRef) {
-        let cell = cellRef.memory
+    func circleView(circleView:ZXCircleView, configureCell cellRef:ZXCircleViewCellRef) {
+        let cell = cellRef.pointee
         
         func modelFrom(_ cell: ZXCircleViewCell) -> CCArticleModel? {
             guard let cellIndex = cell.index else {
@@ -155,11 +152,11 @@ extension CCPTableArray: ZXCircleViewDelegate {
                 return
         }
         
-        cell.imageView.kf_setImageWithURL(url)
+        cell.imageView.kf.setImage(with: url)
         cell.titleLabel.text = model.title
     }
     
-    func circleView(_ circleView: ZXCircleView, didSelectedCellAtIndex index: Int) {
+    func circleView(circleView:ZXCircleView, didSelectedCellAtIndex index:Int) {
         
         //model
         let model = self.homeModel.banners[index]

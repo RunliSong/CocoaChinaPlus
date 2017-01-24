@@ -8,7 +8,6 @@
 
 import UIKit
 import SQLite
-import ZXKit
 
 let kArticleDAO = CCDB.tableManager.articleDAO
 
@@ -25,20 +24,20 @@ class CCArticleService: NSObject {
     class func insertArtice(_ model:CCArticleModel) -> Bool {
         
         do{
-            try CCDB.connection.run(kArticleDAO.table.insert(
+            try CCDB.connection.run((kArticleDAO?.table.insert(
                 kArticleDAO!.identity <- model.identity,
                 kArticleDAO!.title     <- model.title,
                 kArticleDAO!.linkURL <- model.linkURL,
                 kArticleDAO!.imageURL  <- model.imageURL,
                 kArticleDAO!.type <- 0,
-                kArticleDAO!.dateOfRead <- Date().string()))
+                kArticleDAO!.dateOfRead <- Date().string()))!)
             
             
             CCArticleCache.sharedCache.updateCache()
             
             return true;
         }catch {
-            println("add failed: \(error)")
+            print("add failed: \(error)")
             return false
         }
     }
@@ -69,10 +68,10 @@ class CCArticleService: NSObject {
     //收藏文章
     class func collectArticleById(_ identity:String) -> Bool {
         let update = kArticleDAO?.table.filter((kArticleDAO?.identity)! == identity)
-                                      .update(kArticleDAO.type <- 1,
-                                              kArticleDAO.dateOfCollection <- Date().string())
+                                      .update((kArticleDAO?.type <- 1)!,
+                                              (kArticleDAO?.dateOfCollection <- Date().string())!)
         
-        if try! CCDB.connection.run(update) > 0 {
+        if try! CCDB.connection.run(update!) > 0 {
             print("update alice")
             CCArticleCache.sharedCache.updateCache()
             return true;

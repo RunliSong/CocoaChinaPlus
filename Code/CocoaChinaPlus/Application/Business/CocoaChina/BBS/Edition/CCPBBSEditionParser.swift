@@ -7,14 +7,14 @@
 //
 
 import UIKit
-import ZXKit
 
 // MARK: CCPBBSEditionParser
 class CCPBBSEditionParser {
     
     //解析版面文章
     class func parserEdition(_ urlString: String, result: @escaping (_ model: CCPBBSEditionModel) -> Void) {
-        CCRequest(.GET, urlString).responseJi { (ji, error) -> Void in
+        
+        _ = CCRequest(.get, urlString).responseJi { (ji, error) -> Void in
             guard let list = ji?.xPath("//li[@class='articlelist clearfix']") else {
                 return
             }
@@ -32,6 +32,7 @@ class CCPBBSEditionParser {
                 }
                 
                 //作者
+                
                 author = author.stringByDeletingScopeString("<span>", end: "</span>")
                 author = author.stringByDeletingOccurrencesOfString("<span></span></p>")
                 author = author.stringByDeletingOccurrencesOfString("<p class=\"bbs_author\">")
@@ -58,12 +59,13 @@ class CCPBBSEditionParser {
                 edition.pagenext = Int(pagenowNode.content!)! + 1
             } else {
                 //没有就拿url中的+1
-                let url = NSURL(string: urlString)!
-                edition.pagenext = Int(url.paramValue("page")!)! + 1
+                let url = URL(string: urlString)!
+                
+                edition.pagenext = Int(url.paramValue(key: "page")!)! + 1
             }
             
             //回調
-            result(model: edition)
+            result(edition)
         }
     }
     

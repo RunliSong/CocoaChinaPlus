@@ -11,50 +11,49 @@ import Alamofire
 import Ji
 import MBProgressHUD
 import Neon
-import ZXKit
 
 //MARK: - Alamofire - Request
-extension Request {
+extension DataRequest {
     
     func responseJi(_ completionJi:@escaping (_ ji:Ji?,_ error:Error?) -> Void) -> Self {
         
-        return response(completionHandler: { (request, response, data, error) -> Void in
-            guard error == nil && data != nil else {
-                alert("您的网络有问题，请确认网络是否异常")
+        return response { response in
+            guard response.error == nil && response.data != nil else {
+                UIAlertView.quickTip(message: "您的网络有问题，请确认网络是否异常")
                 return
             }
             
-            
-            let jiDoc = Ji(htmlData: data!)!
+            let jiDoc = Ji(htmlData: response.data!)!
             completionJi(ji: jiDoc, error: error)
-        })
+          
+        }
     }
 }
 
 
 public func CCRequest(
-    _ method: Alamofire.Method ,
-    _ URLString: URLStringConvertible,
+    _ method: HTTPMethod,
+    _ URLString: String,
     cheat:Bool = true,
-    parameters: [String: AnyObject]? = nil,
-    encoding: ParameterEncoding = .URL)
-    -> Request {
+    parameters: Parameters? = nil,
+    encoding: ParameterEncoding = URLEncoding.default)
+    -> DataRequest {
         
-        var headers:[String: String]?
+        var headers:HTTPHeaders?
         if cheat {
-            headers = [String: String]()
+            headers = HTTPHeaders()
             headers!["User-Agent"] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36"
         }
         
         
-        return Alamofire.request(method, URLString, parameters: parameters, encoding: encoding, headers: headers)
+        return Alamofire.request(URLString, method: method, parameters: parameters, encoding: encoding, headers: headers)
 }
 
 extension MBProgressHUD {
     static func showText(_ text:String) {
         let view = UIApplication.shared.keyWindow
         let hud = MBProgressHUD.showAdded(to: view!, animated: true)
-        hud.labelText = text
+        hud.label.text = text
         hud.mode = MBProgressHUDMode.text
         hud.color = UIColor.assistColor()
         hud.margin = 10.0

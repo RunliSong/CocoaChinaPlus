@@ -19,10 +19,6 @@ class CCAboutViewController: ZXBaseViewController {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    required init(navigatorURL URL: NSURL, query: Dictionary<String, String>) {
-        fatalError("init(navigatorURL:query:) has not been implemented")
-    }
     
     override func viewDidLoad() {
         
@@ -31,7 +27,7 @@ class CCAboutViewController: ZXBaseViewController {
         self.scrollView.delegate = self
         self.view.addSubview(self.scrollView)
         
-        let imageview = UIImageView(image: R.image.about)
+        let imageview = UIImageView(image: R.image.about())
         imageview.frame = self.scrollView.bounds
         imageview.autoresizingMask = UIViewAutoresizing.flexibleHeight
         self.scrollView.addSubview(imageview)

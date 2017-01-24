@@ -9,7 +9,6 @@
 import UIKit
 import Alamofire
 import Neon
-import ZXKit
 
 //static var pagenow = 1
 // MARK: ZXBaseViewController
@@ -20,7 +19,7 @@ class CCPBBSEditionViewController: ZXBaseViewController {
         let newTableView = UITableView(frame: CGRect.zero, style: .plain)
         newTableView.delegate = self
         newTableView.dataSource = self
-        newTableView.backgroundColor = ZXColor(0x000000, alpha: 0.8)
+        newTableView.backgroundColor = UIColor(hex: 0x000000, alpha: 0.8)
         newTableView.separatorStyle = .none
         newTableView.addInfiniteScrolling(actionHandler: { [weak self] () -> Void in
             guard let sself = self else {
@@ -66,10 +65,6 @@ class CCPBBSEditionViewController: ZXBaseViewController {
         super.init(coder: aDecoder)
     }
 
-    required init(navigatorURL URL: NSURL, query: Dictionary<String, String>) {
-        fatalError("init(navigatorURL:query:) has not been implemented")
-    }
-    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         self.tableview.fillSuperview()
@@ -93,11 +88,11 @@ extension CCPBBSEditionViewController {
         //建立下一分頁連結
         var newURL: URL
         if let _ = urlParameter["more"] {
-            newURL = url.newURLByReplaceParams(["page": String(self.dataSource.pagenext)])
+            newURL = url.newURLByReplaceParams(params: ["page": String(self.dataSource.pagenext)])
             self.currentLink = newURL.absoluteString
         } else {
             //之前是第一页
-            newURL = url.newURLByAppendingParams(["more": "1", "page": String(self.dataSource.pagenext)])
+            newURL = url.newURLByAppendingParams(params: ["more": "1", "page": String(self.dataSource.pagenext)])
             self.currentLink = newURL.absoluteString
         }
         
@@ -200,9 +195,9 @@ class CCPBBSEditionTableViewCell: CCPTableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.titleLabel.anchorAndFillEdge(Edge.Top, xPad: 4, yPad: 4, otherSize: AutoHeight)
-        self.authorLabel.anchorInCornerWithAutoSize(Corner.BottomLeft, xPad: 4, yPad: 0)
-        self.timeLabel.anchorInCornerWithAutoSize(Corner.BottomRight, xPad: 4, yPad: 0)
+        self.titleLabel.anchorAndFillEdge(Edge.top, xPad: 4, yPad: 4, otherSize: AutoHeight)
+        self.authorLabel.anchorInCornerWithAutoSize(Corner.bottomLeft, xPad: 4, yPad: 0)
+        self.timeLabel.anchorInCornerWithAutoSize(Corner.bottomRight, xPad: 4, yPad: 0)
     }
     
     func configure(_ model: CCPBBSEditionPostModel) {

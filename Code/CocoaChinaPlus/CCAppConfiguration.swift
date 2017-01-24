@@ -31,7 +31,7 @@ class CCAppConfiguration: NSObject {
         let channel = Bundle.main.infoDictionary!["ZXApplicationChannel"] as! String
         let version = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
         
-        MobClick.startWithAppkey(CCAppKey.appUM, reportPolicy: BATCH, channelId: channel)
+        MobClick.start(withAppkey: CCAppKey.appUM, reportPolicy: BATCH, channelId: channel)
         MobClick.setAppVersion(version)
         
         MobClick.updateOnlineConfig()
@@ -44,7 +44,7 @@ class CCAppConfiguration: NSObject {
         UMSocialData.setAppKey(CCAppKey.appUM)
         UMSocialWechatHandler.setWXAppId(CCAppKey.appWeChat.appkey, appSecret: CCAppKey.appWeChat.secret, url: nil)
         
-        UMSocialSinaSSOHandler.openNewSinaSSOWithAppKey(CCAppKey.appSina.appkey, secret: CCAppKey.appSina.secret, redirectURL: "http://sns.whalecloud.com/sina2/callback")
+        UMSocialSinaSSOHandler.openNewSinaSSO(withAppKey: CCAppKey.appSina.appkey, secret: CCAppKey.appSina.secret, redirectURL: "http://sns.whalecloud.com/sina2/callback")
         UMSocialConfig.hiddenNotInstallPlatforms(nil)
     }
     
@@ -53,8 +53,8 @@ class CCAppConfiguration: NSObject {
     */
     fileprivate class func configureJPush(_ launchOptions: [AnyHashable: Any]?) {
         let type = UIUserNotificationType.badge.rawValue | UIUserNotificationType.sound.rawValue | UIUserNotificationType.alert.rawValue
-        APService.registerForRemoteNotificationTypes(type, categories: nil)
-        APService.setupWithOption(launchOptions)
+        APService.register(forRemoteNotificationTypes: type, categories: nil)
+        APService.setup(withOption: launchOptions)
         
         if launchOptions != nil {
             if let userInfo = launchOptions![UIApplicationLaunchOptionsKey.remoteNotification] as? NSDictionary {

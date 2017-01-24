@@ -8,8 +8,15 @@
 
 import UIKit
 import RxSwift
-import GCDWebServer
 import Neon
+
+func ZXScreenWidth() -> CGFloat {
+    return UIScreen.main.bounds.size.width
+}
+
+func ZXScreenHeight() -> CGFloat {
+    return UIScreen.main.bounds.size.height
+}
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -64,7 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
         APService.handleRemoteNotification(userInfo)
-        CCRemoteNotificationHandler.sharedHandler.handle(userInfo)
+        CCRemoteNotificationHandler.sharedHandler.handle(userInfo as NSDictionary)
     }
     
     
@@ -96,11 +103,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //分享跳转相关
     func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
-        return UMSocialSnsService.handleOpenURL(url)
+        return UMSocialSnsService.handleOpen(url)
     }
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-        return UMSocialSnsService.handleOpenURL(url)
+        return UMSocialSnsService.handleOpen(url)
     }
 }
 

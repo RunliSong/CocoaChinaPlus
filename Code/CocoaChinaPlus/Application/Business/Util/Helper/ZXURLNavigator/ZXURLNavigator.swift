@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import ZXKit
 
 private let URLMaps: Dictionary<String,ZXBaseViewController.Type> =
    ["go/ccp/article":CCPArticleViewController.self,
@@ -41,7 +40,7 @@ func ZXPresentURL(_ url:String, param:Dictionary<String,String>) {
 }
 
 func ZXPop() {
-   ZXNav().popViewControllerAnimated(true)
+   ZXNav().popViewController(animated: true)
 }
 
 func ZXNav() -> ZXNavigationController {

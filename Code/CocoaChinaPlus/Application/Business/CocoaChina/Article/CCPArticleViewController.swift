@@ -11,8 +11,6 @@ import Alamofire
 import Kingfisher
 import MBProgressHUD
 import RxSwift
-import ZXKit
-import CCAD
 
 enum CCPArticleViewType {
     case blog
@@ -23,9 +21,6 @@ class CCPArticleViewController: ZXBaseViewController {
 
     fileprivate var webview:CCCocoaChinaWebView!
     fileprivate var cuteView:ZXCuteView!
-    
-    fileprivate var adBanner : CCADBanner!
-    
     //文章的wap链接
     fileprivate var wapURL : String!
     //文章的identity
@@ -52,10 +47,6 @@ class CCPArticleViewController: ZXBaseViewController {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-
-    required init(navigatorURL URL: NSURL, query: Dictionary<String, String>) {
-        fatalError("init(navigatorURL:query:) has not been implemented")
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,8 +54,6 @@ class CCPArticleViewController: ZXBaseViewController {
         self.webview = CCCocoaChinaWebView(frame: self.view.bounds)
         self.view.addSubview(self.webview)
         self.open(wapURL)
-        //广告处理
-        self.adHandle()
         //cuteview逻辑
         self.cuteViewHandle()
         
@@ -73,12 +62,7 @@ class CCPArticleViewController: ZXBaseViewController {
             self.addRightBarButtonItems()
         }
     }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        self.adBanner.anchorAndFillEdge(.Bottom, xPad: 0, yPad: 0, otherSize:48)
-    }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.cuteView.removeFromSuperview()
@@ -90,7 +74,7 @@ class CCPArticleViewController: ZXBaseViewController {
         if url.host == "www.cocoachina.com" {
             self.webview.open(urlString)
         }else if url.host == "objccn.io" || url.host == "www.objccn.io" {
-            self.webview.loadRequest( URLRequest(URL: url))
+            self.webview.loadRequest( URLRequest(url: url))
         }
     }
 }
@@ -99,97 +83,66 @@ class CCPArticleViewController: ZXBaseViewController {
 extension CCPArticleViewController {
     
     fileprivate func addRightBarButtonItems() {
-        let image = self._isLiked() ? R.image.nav_like_yes : R.image.nav_like_no
+        let image = self._isLiked() ? R.image.nav_like_yes() : R.image.nav_like_no()
         let likeButton = UIButton(frame: CGRect(x: 0, y: 0, width: 44, height: 44))
         likeButton.setImage(image, for: UIControlState())
         let collectionItem = UIBarButtonItem(customView: likeButton)
         
         let shareButton = UIButton(frame: CGRect(x: 0, y: 0, width: 44, height: 44))
-        shareButton.setImage(R.image.share, for: UIControlState())
-        shareButton.rx_tap.subscribeNext({[unowned self] _ in
+        shareButton.setImage(R.image.share(), for: UIControlState())
+        shareButton.rx.tap.bindNext { [unowned self] _ in
             UMSocialSnsService.presentSnsIconSheetView(self,
-                appKey: CCAppKey.appUM,
-                shareText: kADText(),
-                shareImage: self.webview.image,
-                shareToSnsNames: [UMShareToSina,UMShareToWechatSession,
-                    UMShareToWechatTimeline,UMShareToWechatFavorite],
-                delegate: self)
-            }).addDisposableTo(self.disposeBag)
+                                                       appKey: CCAppKey.appUM,
+                                                       shareText: kADText(),
+                                                       shareImage: self.webview.image,
+                                                       shareToSnsNames: [UMShareToSina,UMShareToWechatSession,
+                                                                         UMShareToWechatTimeline,UMShareToWechatFavorite],
+                                                       delegate: self)
+        }.addDisposableTo(self.disposeBag)
         
         let shareItem = UIBarButtonItem(customView: shareButton)
         
-        self.navigationItem.rightBarButtonItemsFixedSpace([collectionItem,shareItem])
+        self.navigationItem.rightBarButtonItemsFixedSpace(items: [collectionItem,shareItem])
         
-        likeButton
-            .rx_tap
-            .subscribeNext({ [unowned self] _ in
-                if self._isLiked() {
-                    
-                    let result = CCArticleService.decollectArticleById(self.identity)
-                    if result {
-                        MBProgressHUD.showText("取消成功")
-                        likeButton.setImage(R.image.nav_like_no, forState: UIControlState.Normal)
-                    }else {
-                        MBProgressHUD.showText("取消失败")
-                    }
+        likeButton.rx.tap.bindNext { [unowned self] _ in
+            if self._isLiked() {
+                
+                let result = CCArticleService.decollectArticleById(self.identity)
+                if result {
+                    MBProgressHUD.showText("取消成功")
+                    likeButton.setImage(R.image.nav_like_no(), for: UIControlState.normal)
                 }else {
-                    if !CCArticleService.isArticleExsitById(self.identity) {
-                        //如果文章不存在，说明是push之类的进来的
-                        let model = CCArticleModel()
-                        model.identity = self.identity
-                        model.title = self.webview.title
-                        model.imageURL = self.webview.imageURL
-                        
-                        CCArticleService.insertArtice(model)
-                    }
-                    let result = CCArticleService.collectArticleById(self.identity)
-                    
-                    if result {
-                        MBProgressHUD.showText("收藏成功")
-                        likeButton.setImage(R.image.nav_like_yes, forState: UIControlState.Normal)
-                    }else {
-                        MBProgressHUD.showText("收藏失败")
-                    }
+                    MBProgressHUD.showText("取消失败")
                 }
-                
-                
-                let scaleAnimation = CAKeyframeAnimation(keyPath: "transform.scale")
-                scaleAnimation.duration = 0.3
-                scaleAnimation.values = [1.0,1.2,1.0]
-                scaleAnimation.keyTimes = [0.0,0.5,1.0]
-                scaleAnimation.removedOnCompletion = true
-                scaleAnimation.timingFunctions = [CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn), CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)]
-                likeButton.layer.addAnimation(scaleAnimation, forKey: "likeButtonscale")
-                })
-            .addDisposableTo(self.disposeBag)
-    }
-    
-    
-    /**
-     广告处理
-     */
-    fileprivate func adHandle(){
-        
-        self.adBanner = CCADBanner(type: CCADBannerViewType.Article, rootViewController: self, completionBlock: {[weak self] (succeed:Bool, errorInfo:[AnyHashable: Any]!) -> Void in
-            guard let sself = self else {
-                return
-            }
-
-            if succeed {
-                sself.adBanner!.hidden = false
-
-                var rect = sself.view.bounds
-                rect.size.height -= 50
-                sself.webview.frame = rect
             }else {
-                sself.adBanner!.hidden = true
-                sself.webview.frame = sself.view.bounds
+                if !CCArticleService.isArticleExsitById(self.identity) {
+                    //如果文章不存在，说明是push之类的进来的
+                    let model = CCArticleModel()
+                    model.identity = self.identity
+                    model.title = self.webview.title
+                    model.imageURL = self.webview.imageURL
+                    
+                    CCArticleService.insertArtice(model)
+                }
+                let result = CCArticleService.collectArticleById(self.identity)
+                
+                if result {
+                    MBProgressHUD.showText("收藏成功")
+                    likeButton.setImage(R.image.nav_like_yes(), for: UIControlState.normal)
+                }else {
+                    MBProgressHUD.showText("收藏失败")
+                }
             }
-        })
-        
-        self.adBanner.hidden = true;
-        self.view.addSubview(self.adBanner);
-        
+            
+            
+            let scaleAnimation = CAKeyframeAnimation(keyPath: "transform.scale")
+            scaleAnimation.duration = 0.3
+            scaleAnimation.values = [1.0,1.2,1.0]
+            scaleAnimation.keyTimes = [0.0,0.5,1.0]
+            scaleAnimation.isRemovedOnCompletion = true
+            scaleAnimation.timingFunctions = [CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn), CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)]
+            likeButton.layer.add(scaleAnimation, forKey: "likeButtonscale")
+        }.addDisposableTo(self.disposeBag)
     }
     
     fileprivate func cuteViewHandle() {
@@ -214,8 +167,8 @@ extension CCPArticleViewController {
     fileprivate func _addAnimationForBackTop() {
         //将webview置顶
         for subview in self.webview.subviews {
-            if subview.isKindOfClass(UIScrollView.self) {
-                (subview as! UIScrollView).setContentOffset(CGPointZero, animated: true)
+            if subview.isKind(of: UIScrollView.self) {
+                (subview as! UIScrollView).setContentOffset(CGPoint.zero, animated: true)
             }
         }
         
@@ -242,7 +195,7 @@ extension CCPArticleViewController : UMSocialUIDelegate {
     */
     
     func closeOauthWebViewController(_ navigationCtroller: UINavigationController!, socialControllerService: UMSocialControllerService!) -> Bool {
-        println("自定义关闭授权页面事件");
+        print("自定义关闭授权页面事件");
         return true;
     }
     
@@ -255,7 +208,7 @@ extension CCPArticleViewController : UMSocialUIDelegate {
     */
     
     func didCloseUIViewController(_ fromViewControllerType: UMSViewControllerType) {
-        println("关闭当前页面之后")
+        print("关闭当前页面之后")
     }
     
     
@@ -265,15 +218,15 @@ extension CCPArticleViewController : UMSocialUIDelegate {
     @param response 返回`UMSocialResponseEntity`对象，`UMSocialResponseEntity`里面的viewControllerType属性可以获得页面类型
     */
     
-    func didFinishGetUMSocialDataInViewController(_ response: UMSocialResponseEntity!) {
-        println("各个页面执行授权完成、分享完成、或者评论完成时的回调函数")
+    func didFinishGetUMSocialData(inViewController response: UMSocialResponseEntity!) {
+        print("各个页面执行授权完成、分享完成、或者评论完成时的回调函数")
         
         //根据`responseCode`得到发送结果,如果分享成功
         if(response.responseCode == UMSResponseCodeSuccess)
         {
             //得到分享到的微博平台名
             
-            println("share to sns name is \((response.data as NSDictionary).allKeys.first!)")
+            print("share to sns name is \((response.data as NSDictionary).allKeys.first!)")
         }
         
     }
@@ -283,39 +236,39 @@ extension CCPArticleViewController : UMSocialUIDelegate {
     @param platformName 点击分享平台
     @prarm socialData   分享内容
     */
-    func didSelectSocialPlatform(_ platformName: String!, withSocialData socialData: UMSocialData!) {
+    func didSelectSocialPlatform(_ platformName: String!, with socialData: UMSocialData!) {
         
         let config : UMSocialExtConfig = socialData.extConfig
-        println("点击分享列表页面，之后的回调方法，你可以通过判断不同的分享平台，来设置分享内容。")
+        print("点击分享列表页面，之后的回调方法，你可以通过判断不同的分享平台，来设置分享内容。")
         if platformName == UMShareToSina {
-            println("分享到新浪")
+            print("分享到新浪")
             //设置微博分享参数
             let image = self.webview.scrollView.capture()
             config.sinaData.shareImage = image
             config.sinaData.shareText = self.webview.title + " " + self.wapURL
         }else if platformName == UMShareToWechatTimeline {
-            println("分享到微信朋友圈")
+            print("分享到微信朋友圈")
             //设置微信朋友圈分享参数
             config.wechatTimelineData.title = self.webview.title
             config.wechatTimelineData.shareText = kADText()
             config.wechatTimelineData.wxMessageType = UMSocialWXMessageTypeWeb
             config.wechatTimelineData.url = self.wapURL
         }else if platformName == UMShareToWechatSession {
-            println("分享到微信好友")
+            print("分享到微信好友")
             //设置微信好友分享参数
             config.wechatSessionData.title = self.webview.title
             config.wechatSessionData.shareText = kADText()
             config.wechatSessionData.wxMessageType = UMSocialWXMessageTypeWeb
             config.wechatSessionData.url = self.wapURL
         }else if platformName == UMShareToWechatFavorite {
-            println("分享到微信收藏")
+            print("分享到微信收藏")
             //设置微信收藏分享参数
             config.wechatFavoriteData.title = self.webview.title
             config.wechatFavoriteData.shareText = kADText()
             config.wechatFavoriteData.wxMessageType = UMSocialWXMessageTypeWeb
             config.wechatFavoriteData.url = self.wapURL
         }else {
-            println("分享到其他")
+            print("分享到其他")
         }
     };
 }
