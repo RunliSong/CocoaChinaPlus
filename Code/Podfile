@@ -6,8 +6,8 @@ inhibit_all_warnings!
 target 'CocoaChinaPlus' do
 
     #pod 'Reveal-iOS-SDK', :configurations => ['Debug']
-    pod 'GodEye', :git => 'git@git.oschina.net:GodEyeSwift/GodEye.git'
-
+    pod 'GodEye', :git => 'git@git.oschina.net:GodEyeSwift/GodEye.git', :configurations => ['Debug']
+        #Temporary
         pod 'AssistiveButton', :git => 'git@git.oschina.net:GodEyeSwift/AssistiveButton.git'
         pod 'AppSwizzle', :git => 'git@git.oschina.net:GodEyeSwift/AppSwizzle.git'
         pod 'ASLEye', :git => 'git@git.oschina.net:GodEyeSwift/ASLEye.git'
@@ -17,6 +17,7 @@ target 'CocoaChinaPlus' do
         pod 'SystemEye', :git => 'git@git.oschina.net:GodEyeSwift/SystemEye.git'
         pod 'LeakEye', :git => 'git@git.oschina.net:GodEyeSwift/LeakEye.git'
 
+    pod 'Log4G'
     pod 'AppBaseKit', '~> 0.1.0'
     pod 'SwViewCapture', '~> 1.0.5'
     pod 'Neon', '~> 0.4.0'

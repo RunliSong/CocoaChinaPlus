@@ -165,6 +165,7 @@ DEPENDENCIES:
   - Ji (~> 2.0.1)
   - Kingfisher (~> 3.2.4)
   - LeakEye (from `git@git.oschina.net:GodEyeSwift/LeakEye.git`)
+  - Log4G
   - MBProgressHUD (~> 1.0.0)
   - Neon (~> 0.4.0)
   - NetworkEye (from `git@git.oschina.net:GodEyeSwift/NetworkEye.git`)
@@ -258,6 +259,6 @@ SPEC CHECKSUMS:
   UMengAnalytics: fdf0c0a8c07d8bffc012ffa3c68e5d490af42098
   UMengUShare: fc0a98b8d5297632e82874318fd72a10d17da228
 
-PODFILE CHECKSUM: 6f9d7651d7793742ca5c0802ffb5a08592cd9111
+PODFILE CHECKSUM: 5a2f2d5367d9e9f07fafb5591e429d229bc60c41
 
 COCOAPODS: 1.1.1
