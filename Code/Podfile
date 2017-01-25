@@ -4,28 +4,35 @@ use_frameworks!
 inhibit_all_warnings!
 
 target 'CocoaChinaPlus' do
-#pod 'Reveal-iOS-SDK', :configurations => ['Debug']
 
-pod 'AppBaseKit', '~> 0.1.0'
-pod 'SwViewCapture', '~> 1.0.5'
+    #pod 'Reveal-iOS-SDK', :configurations => ['Debug']
+    pod 'GodEye', :git => 'git@git.oschina.net:GodEyeSwift/GodEye.git'
 
-pod 'Neon', '~> 0.4.0'
-pod 'SwiftyUserDefaults', '~> 3.0.0'
-pod 'Ji', '~> 2.0.1'
-pod 'Kingfisher', '~> 3.2.4'
-pod 'Alamofire', '~> 4.3.0'
-pod 'RxSwift', '~> 3.1.0'
-pod 'RxCocoa', '~> 3.1.0'
+        pod 'AssistiveButton', :git => 'git@git.oschina.net:GodEyeSwift/AssistiveButton.git'
+        pod 'AppSwizzle', :git => 'git@git.oschina.net:GodEyeSwift/AppSwizzle.git'
+        pod 'ASLEye', :git => 'git@git.oschina.net:GodEyeSwift/ASLEye.git'
+        pod 'CrashEye', :git => 'git@git.oschina.net:GodEyeSwift/CrashEye.git'
+        pod 'NetworkEye', :git => 'git@git.oschina.net:GodEyeSwift/NetworkEye.git'
+        pod 'ANREye', :git => 'git@git.oschina.net:GodEyeSwift/ANREye.git'
+        pod 'SystemEye', :git => 'git@git.oschina.net:GodEyeSwift/SystemEye.git'
+        pod 'LeakEye', :git => 'git@git.oschina.net:GodEyeSwift/LeakEye.git'
 
-pod 'SQLite.swift', '~> 0.11.2'
-
-pod 'R.swift', '~> 3.2.0'
-#OC库
-pod 'SVPullToRefresh', '0.4.1'
-pod 'MBProgressHUD', '~> 1.0.0'
-
-pod 'UMengAnalytics', '~> 3.5.10'
-pod 'UMengUShare', '~> 6.2.2'
+    pod 'AppBaseKit', '~> 0.1.0'
+    pod 'SwViewCapture', '~> 1.0.5'
+    pod 'Neon', '~> 0.4.0'
+    pod 'SwiftyUserDefaults', '~> 3.0.0'
+    pod 'Ji', '~> 2.0.1'
+    pod 'Kingfisher', '~> 3.2.4'
+    pod 'Alamofire', '~> 4.3.0'
+    pod 'RxSwift', '~> 3.1.0'
+    pod 'RxCocoa', '~> 3.1.0'
+    pod 'SQLite.swift', '~> 0.11.2'
+    pod 'R.swift', '~> 3.2.0'
+    #OC库
+    pod 'SVPullToRefresh', '0.4.1'
+    pod 'MBProgressHUD', '~> 1.0.0'
+    pod 'UMengAnalytics', '~> 3.5.10'
+    pod 'UMengUShare', '~> 6.2.2'
 end
 
 post_install do |installer|

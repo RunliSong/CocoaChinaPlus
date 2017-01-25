@@ -1,14 +1,41 @@
 PODS:
   - Alamofire (4.3.0)
+  - ANREye (0.1.0)
   - AppBaseKit (0.1.0)
+  - AppSwizzle (0.1.0)
+  - ASLEye (0.1.0)
+  - AssistiveButton (0.1.0)
+  - CrashEye (0.1.0)
+  - FileBrowser (0.2.0)
+  - GodEye (0.1.0):
+    - ANREye
+    - AppBaseKit
+    - AppSwizzle
+    - ASLEye
+    - AssistiveButton
+    - CrashEye
+    - FileBrowser (~> 0.2.0)
+    - LeakEye
+    - Log4G (~> 0.1.1)
+    - MJRefresh (~> 3.1.12)
+    - NetworkEye
+    - SQLite.swift (~> 0.11.1)
+    - SwViewCapture (~> 1.0.5)
+    - SystemEye
   - Ji (2.0.1):
     - Ji/Ji (= 2.0.1)
   - Ji/Ji (2.0.1):
     - Ji/Ji-libxml
   - Ji/Ji-libxml (2.0.1)
   - Kingfisher (3.2.4)
+  - LeakEye (0.1.0):
+    - AppSwizzle
+  - Log4G (0.1.1)
   - MBProgressHUD (1.0.0)
+  - MJRefresh (3.1.12)
   - Neon (0.4.0)
+  - NetworkEye (0.1.0):
+    - AppSwizzle
   - R.swift (3.2.0):
     - R.swift.Library (~> 3.0.2)
   - R.swift.Library (3.0.2)
@@ -21,6 +48,7 @@ PODS:
   - SVPullToRefresh (0.4.1)
   - SwiftyUserDefaults (3.0.0)
   - SwViewCapture (1.0.5)
+  - SystemEye (0.1.0)
   - UMengAnalytics (3.5.16)
   - UMengUShare (6.2.2):
     - UMengUShare/Core (= 6.2.2)
@@ -127,11 +155,19 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 4.3.0)
+  - ANREye (from `git@git.oschina.net:GodEyeSwift/ANREye.git`)
   - AppBaseKit (~> 0.1.0)
+  - AppSwizzle (from `git@git.oschina.net:GodEyeSwift/AppSwizzle.git`)
+  - ASLEye (from `git@git.oschina.net:GodEyeSwift/ASLEye.git`)
+  - AssistiveButton (from `git@git.oschina.net:GodEyeSwift/AssistiveButton.git`)
+  - CrashEye (from `git@git.oschina.net:GodEyeSwift/CrashEye.git`)
+  - GodEye (from `git@git.oschina.net:GodEyeSwift/GodEye.git`)
   - Ji (~> 2.0.1)
   - Kingfisher (~> 3.2.4)
+  - LeakEye (from `git@git.oschina.net:GodEyeSwift/LeakEye.git`)
   - MBProgressHUD (~> 1.0.0)
   - Neon (~> 0.4.0)
+  - NetworkEye (from `git@git.oschina.net:GodEyeSwift/NetworkEye.git`)
   - R.swift (~> 3.2.0)
   - RxCocoa (~> 3.1.0)
   - RxSwift (~> 3.1.0)
@@ -139,16 +175,77 @@ DEPENDENCIES:
   - SVPullToRefresh (= 0.4.1)
   - SwiftyUserDefaults (~> 3.0.0)
   - SwViewCapture (~> 1.0.5)
+  - SystemEye (from `git@git.oschina.net:GodEyeSwift/SystemEye.git`)
   - UMengAnalytics (~> 3.5.10)
   - UMengUShare (~> 6.2.2)
 
+EXTERNAL SOURCES:
+  ANREye:
+    :git: git@git.oschina.net:GodEyeSwift/ANREye.git
+  AppSwizzle:
+    :git: git@git.oschina.net:GodEyeSwift/AppSwizzle.git
+  ASLEye:
+    :git: git@git.oschina.net:GodEyeSwift/ASLEye.git
+  AssistiveButton:
+    :git: git@git.oschina.net:GodEyeSwift/AssistiveButton.git
+  CrashEye:
+    :git: git@git.oschina.net:GodEyeSwift/CrashEye.git
+  GodEye:
+    :git: git@git.oschina.net:GodEyeSwift/GodEye.git
+  LeakEye:
+    :git: git@git.oschina.net:GodEyeSwift/LeakEye.git
+  NetworkEye:
+    :git: git@git.oschina.net:GodEyeSwift/NetworkEye.git
+  SystemEye:
+    :git: git@git.oschina.net:GodEyeSwift/SystemEye.git
+
+CHECKOUT OPTIONS:
+  ANREye:
+    :commit: 1eafcf31be3aed0674a285780ca7360e4473b5ea
+    :git: git@git.oschina.net:GodEyeSwift/ANREye.git
+  AppSwizzle:
+    :commit: f651a8d0278d576f6c9832469dbfed94b7e3e350
+    :git: git@git.oschina.net:GodEyeSwift/AppSwizzle.git
+  ASLEye:
+    :commit: 8ed0789ae192fca804197296a99662d7f4eb9a37
+    :git: git@git.oschina.net:GodEyeSwift/ASLEye.git
+  AssistiveButton:
+    :commit: f39b0383e9bf5600e14d876f187d04de2b9184a6
+    :git: git@git.oschina.net:GodEyeSwift/AssistiveButton.git
+  CrashEye:
+    :commit: 1347d5748f4b95f6583ddd74d32d7a8f9af51c0f
+    :git: git@git.oschina.net:GodEyeSwift/CrashEye.git
+  GodEye:
+    :commit: 247f8baddc66c4c787836fb7647f23687a7d5e52
+    :git: git@git.oschina.net:GodEyeSwift/GodEye.git
+  LeakEye:
+    :commit: 0242cf98af9a40c85a1b4cf301bd0d4049f2d945
+    :git: git@git.oschina.net:GodEyeSwift/LeakEye.git
+  NetworkEye:
+    :commit: dcb38e1f7369826d1099ed0186ea3d44ad9657b7
+    :git: git@git.oschina.net:GodEyeSwift/NetworkEye.git
+  SystemEye:
+    :commit: 4b4dba4024ad3ebdb7eded4f28f9a0ffee692f38
+    :git: git@git.oschina.net:GodEyeSwift/SystemEye.git
+
 SPEC CHECKSUMS:
   Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
+  ANREye: 174bf4a0a7e11599375162a15fc1618a6b33fc05
   AppBaseKit: 5bc9211a560e7bd3afb48ed5b2cc303fc2e4073c
+  AppSwizzle: 26bed43934318a4db824e7b414abe46108616ccf
+  ASLEye: 24ea16d9e175506aea445c363cd348295bbb5c79
+  AssistiveButton: d73973ace81c989fe852ac240da9a0987d95e75f
+  CrashEye: 04b5c7d65c5eacdec0be0567656f8e2cc72d21bf
+  FileBrowser: af8abc035daca66a6066351ae162c4af4c6b24dd
+  GodEye: 764f2fb90cff03fae76f365a10053d99d14c3938
   Ji: 6bb602a28dd08b804158f64990e6051ed5de0110
   Kingfisher: 8d80f39da403cd9c9ee11984e1655f4d6a566cdb
+  LeakEye: 1d9d0d61ba712238d5fccaea6d50c4f2b759bca9
+  Log4G: 9ea666802fed9bc836cad029d4e46d30c938ed5d
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
+  MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   Neon: 7fb5a9327e7e57911843f608e08f4893a74deaf9
+  NetworkEye: 115b1976eddbe385cef3336fad55d99c50d57b12
   R.swift: 207a372a2b5977caef440c696a368009460641d1
   R.swift.Library: fbdec16c9802ad104fc1ba53415dc190e6ec5c73
   RxCocoa: 50d7564866da9299161e86a263ce12a0873904d8
@@ -157,9 +254,10 @@ SPEC CHECKSUMS:
   SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
   SwiftyUserDefaults: 0f1d45fc3aafb9064dac661e367f8f83fe21a4b4
   SwViewCapture: 7ddb627ffbc70b21d92690bf25a84e545c38083e
+  SystemEye: 6916627e61005f73bb7da0e1c0b19a177ea45853
   UMengAnalytics: fdf0c0a8c07d8bffc012ffa3c68e5d490af42098
   UMengUShare: fc0a98b8d5297632e82874318fd72a10d17da228
 
-PODFILE CHECKSUM: d1a393788c5bc2d9da45502158c6cffae4992669
+PODFILE CHECKSUM: 6f9d7651d7793742ca5c0802ffb5a08592cd9111
 
 COCOAPODS: 1.1.1

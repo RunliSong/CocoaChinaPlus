@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import Neon
+import GodEye
 
 func ZXScreenWidth() -> CGFloat {
     return UIScreen.main.bounds.size.width
@@ -31,11 +32,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        
         //各种平台配置
-        CCAppConfiguration.configure(application, launchOptions: launchOptions)
+        
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
+        GodEye.makeEye(with: self.window!)
+        CCAppConfiguration.configure(application, launchOptions: launchOptions)
         if let window = self.window {
             window.backgroundColor = UIColor.black
             window.rootViewController = self.tabbarController
