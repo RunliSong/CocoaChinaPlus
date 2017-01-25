@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Log4G
 
 class ZXBaseViewController: UIViewController{
     
@@ -45,6 +46,6 @@ class ZXBaseViewController: UIViewController{
     }
     
     deinit {
-        print("\(self.classForCoder)已正常释放!")
+        Log4G.log("\(self.classForCoder)已正常释放!")
     }
 }

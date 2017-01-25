@@ -8,6 +8,7 @@
 
 import UIKit
 import Neon
+import Log4G
 
 class CCProfileViewController: ZXBaseViewController {
 
@@ -117,7 +118,7 @@ extension CCProfileViewController:UITableViewDataSource,UITableViewDelegate {
             
             switch indexPath.row {
             case 0 :
-                print("QQqun")
+                Log4G.log("QQqun")
                 
             case 1:
                 let vc = CCAboutViewController()

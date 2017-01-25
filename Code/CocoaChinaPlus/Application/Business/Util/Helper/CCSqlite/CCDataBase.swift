@@ -9,6 +9,7 @@
 import Foundation
 import SQLite
 import AppBaseKit
+import Log4G
 
 let CCDB = CCDataBase.sharedDB
 
@@ -42,7 +43,7 @@ class CCDataBase: NSObject {
             //建立数据库表
             self.tableManager = CCTableManager(connection: self.connection)
         }catch {
-            print("创建数据库失败！原因: \(error)")
+            Log4G.error("创建数据库失败！原因: \(error)")
         }
     }
 }

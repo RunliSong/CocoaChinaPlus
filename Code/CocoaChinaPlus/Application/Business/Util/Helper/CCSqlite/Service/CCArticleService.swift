@@ -8,6 +8,7 @@
 
 import UIKit
 import SQLite
+import Log4G
 
 let kArticleDAO = CCDB.tableManager.articleDAO
 
@@ -37,7 +38,7 @@ class CCArticleService: NSObject {
             
             return true;
         }catch {
-            print("add failed: \(error)")
+            Log4G.warning("add failed: \(error)")
             return false
         }
     }
@@ -72,11 +73,11 @@ class CCArticleService: NSObject {
                                               (kArticleDAO?.dateOfCollection <- Date().string())!)
         
         if try! CCDB.connection.run(update!) > 0 {
-            print("update alice")
+            Log4G.log("update alice")
             CCArticleCache.sharedCache.updateCache()
             return true;
         } else {
-            print("update not found")
+            Log4G.log("update not found")
             return false;
         }
     }
@@ -87,11 +88,11 @@ class CCArticleService: NSObject {
             .update((kArticleDAO?.type <- 0)!)
         
         if try! CCDB.connection.run(update!) > 0 {
-            print("update alice")
+            Log4G.log("update alice")
             CCArticleCache.sharedCache.updateCache()
             return true;
         } else {
-            print("update not found")
+            Log4G.log("update not found")
             return false;
         }
     }
@@ -158,15 +159,15 @@ class CCArticleService: NSObject {
             let alice = kArticleDAO?.table.filter((kArticleDAO?.identity)! == identity)
             
             if try  CCDB.connection.run((alice?.delete())!) > 0 {
-                print("deleted alice")
+                Log4G.log("deleted alice")
                 CCArticleCache.sharedCache.updateCache()
                 return true;
             } else {
-                print("alice not found")
+                Log4G.log("alice not found")
                 return false;
             }
         } catch {
-            print("delete failed: \(error)")
+            Log4G.log("delete failed: \(error)")
             return false;
         }
     }

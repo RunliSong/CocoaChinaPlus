@@ -12,6 +12,7 @@ import MBProgressHUD
 import RxSwift
 import Neon
 import Kingfisher
+import Log4G
 
 class CCPTableArray: NSObject {
 
@@ -148,7 +149,7 @@ extension CCPTableArray: ZXCircleViewDelegate {
             let urlString = model.imageURL,
             let url = URL(string: urlString)
             else {
-                print("資料缺失")
+                Log4G.error("資料缺失")
                 return
         }
         

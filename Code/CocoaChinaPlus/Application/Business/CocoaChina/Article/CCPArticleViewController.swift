@@ -12,6 +12,7 @@ import Kingfisher
 import MBProgressHUD
 import RxSwift
 import SwViewCapture
+import Log4G
 
 enum CCPArticleViewType {
     case blog
@@ -119,9 +120,9 @@ extension CCPArticleViewController {
                 
                 UMSocialManager.default().share(to: type, messageObject: messageObject, currentViewController: self, completion: { (shareResponse:Any?, error:Error?) in
                     if error != nil {
-                        print("Share Fail with error ：%@", error!)
+                        Log4G.error("Share Fail with error ：\(error)")
                     }else{
-                        print("Share succeed")
+                        Log4G.log("Share succeed")
                     }
                 })
                 

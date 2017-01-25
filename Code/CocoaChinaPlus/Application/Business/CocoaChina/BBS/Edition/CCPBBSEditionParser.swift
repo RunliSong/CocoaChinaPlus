@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Log4G
 
 // MARK: CCPBBSEditionParser
 class CCPBBSEditionParser {
@@ -27,7 +28,7 @@ class CCPBBSEditionParser {
                     let timeElement = article.xPath(".//p[@class='bbs_author']/span").first,
                     var author = authorElement.rawContent
                     else {
-                        print("//获取H5元素失敗")
+                        Log4G.warning("//获取H5元素失敗")
                         continue
                 }
                 

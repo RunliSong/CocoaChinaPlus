@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import Ji
+import Log4G
 
 private let baseURL = "http://www.cocoachina.com/bbs/3g"
 
@@ -33,7 +34,7 @@ class CCPBBSParser {
                     let content = contentNode.content,
                     let urlString = titleNode["href"]
                     else {
-                        print("資料毀損")
+                        Log4G.warning("資料毀損")
                         continue
                 }
                 

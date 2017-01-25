@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import Neon
+import Log4G
 
 //static var pagenow = 1
 // MARK: ZXBaseViewController
@@ -48,7 +49,7 @@ class CCPBBSEditionViewController: ZXBaseViewController {
         if let link = query["link"] {
             self.currentLink = link
         } else {
-            print("連結缺失")
+            Log4G.error("連結缺失")
         }
         
         //讀取資料
@@ -81,7 +82,7 @@ extension CCPBBSEditionViewController {
             let url = URL(string: self.currentLink),
             let urlParameter = url.paramDictionary()
             else {
-                print("連結缺失或參數錯誤")
+                Log4G.warning("連結缺失或參數錯誤")
                 return
         }
         

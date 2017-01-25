@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Ji
 import Kingfisher
-
+import Log4G
 class CCCocoaChinaWebView: ZXHighlightWebView {
     
     var title : String!
@@ -32,7 +32,7 @@ class CCCocoaChinaWebView: ZXHighlightWebView {
                 }
                 
                 guard response.error == nil else {
-                    print(response.error!)
+                    Log4G.warning(response.error!)
                     return
                 }
                 
