@@ -62,6 +62,8 @@ class CCArticleTableView: UITableView,UITableViewDelegate, UITableViewDataSource
         for m in models {
             self.articles.append(m)
         }
+        
+        self.reloadData()
     }
     
     /**
