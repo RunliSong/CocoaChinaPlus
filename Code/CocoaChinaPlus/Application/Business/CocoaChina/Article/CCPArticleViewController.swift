@@ -76,8 +76,6 @@ class CCPArticleViewController: ZXBaseViewController {
 
         if url.host == "www.cocoachina.com" {
             self.webview.open(urlString)
-        }else if url.host == "objccn.io" || url.host == "www.objccn.io" {
-            self.webview.loadRequest( URLRequest(url: url))
         }
     }
 }

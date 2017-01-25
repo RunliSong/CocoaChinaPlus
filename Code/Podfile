@@ -4,7 +4,6 @@ use_frameworks!
 inhibit_all_warnings!
 
 target 'CocoaChinaPlus' do
-#pod 'ZXKit', git: 'https://github.com/zixun/ZXKit.git'
 #pod 'Reveal-iOS-SDK', :configurations => ['Debug']
 
 pod 'AppBaseKit', '~> 0.1.0'

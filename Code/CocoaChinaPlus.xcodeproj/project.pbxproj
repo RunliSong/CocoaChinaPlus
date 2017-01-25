@@ -21,6 +21,7 @@
 		9E61C3331BBD4BC900C360E2 /* CCProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E61C3321BBD4BC900C360E2 /* CCProfileViewController.swift */; };
 		9E6B7DED1B8E069400591846 /* AppDef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6B7DEC1B8E069400591846 /* AppDef.swift */; };
 		9E991A231E385440000E221A /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E991A221E385440000E221A /* UIImage+.swift */; };
+		9E991A251E38865B000E221A /* highlight in Resources */ = {isa = PBXBuildFile; fileRef = 9E991A241E38865B000E221A /* highlight */; };
 		9EA065FC1BBEE2E500F8884C /* CCAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA065FB1BBEE2E500F8884C /* CCAboutViewController.swift */; };
 		9EA066431BC3A03800F8884C /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E61C3261BBB19B300C360E2 /* Accounts.framework */; };
 		9EA066441BC3A08D00F8884C /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E61C3281BBB19F900C360E2 /* Social.framework */; };
@@ -133,6 +134,7 @@
 		9E61C3321BBD4BC900C360E2 /* CCProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCProfileViewController.swift; sourceTree = "<group>"; };
 		9E6B7DEC1B8E069400591846 /* AppDef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDef.swift; sourceTree = "<group>"; };
 		9E991A221E385440000E221A /* UIImage+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
+		9E991A241E38865B000E221A /* highlight */ = {isa = PBXFileReference; lastKnownFileType = folder; path = highlight; sourceTree = "<group>"; };
 		9EA065FB1BBEE2E500F8884C /* CCAboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCAboutViewController.swift; sourceTree = "<group>"; };
 		9EA066251BC2B5FB00F8884C /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		9EE4EFFB1B79DEE80071423A /* CocoaChinaPlus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CocoaChinaPlus.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -651,6 +653,7 @@
 		CE5380AA1BF18F5900751F55 /* CCocoaChinaWebView */ = {
 			isa = PBXGroup;
 			children = (
+				9E991A241E38865B000E221A /* highlight */,
 				CE5380AB1BF18F5900751F55 /* CCCocoaChinaWebView.swift */,
 				9E18D1741E364D9700AB1DC2 /* ZXHighlightWebView.swift */,
 				CE5380AC1BF18F5900751F55 /* ccstyle.css */,
@@ -788,6 +791,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9EE4F0091B79DEE80071423A /* LaunchScreen.storyboard in Resources */,
+				9E991A251E38865B000E221A /* highlight in Resources */,
 				9EE4F0061B79DEE80071423A /* Assets.xcassets in Resources */,
 				CE5380C51BF18F5900751F55 /* jquery-1.6.4.min.js in Resources */,
 				9E0EAB6C1BB08EF400DFEF33 /* PushConfig.plist in Resources */,

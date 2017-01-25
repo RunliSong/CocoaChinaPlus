@@ -21,12 +21,14 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.file` struct is generated, and contains static references to 3 files.
+  /// This `R.file` struct is generated, and contains static references to 4 files.
   struct file {
     /// Resource file `PushConfig.plist`.
     static let pushConfigPlist = Rswift.FileResource(bundle: R.hostingBundle, name: "PushConfig", pathExtension: "plist")
     /// Resource file `ccstyle.css`.
     static let ccstyleCss = Rswift.FileResource(bundle: R.hostingBundle, name: "ccstyle", pathExtension: "css")
+    /// Resource file `highlight`.
+    static let highlight = Rswift.FileResource(bundle: R.hostingBundle, name: "highlight", pathExtension: "")
     /// Resource file `jquery-1.6.4.min.js`.
     static let jquery164MinJs = Rswift.FileResource(bundle: R.hostingBundle, name: "jquery-1.6.4.min", pathExtension: "js")
     
@@ -39,6 +41,12 @@ struct R: Rswift.Validatable {
     /// `bundle.url(forResource: "ccstyle", withExtension: "css")`
     static func ccstyleCss(_: Void = ()) -> Foundation.URL? {
       let fileResource = R.file.ccstyleCss
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "highlight", withExtension: "")`
+    static func highlight(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.highlight
       return fileResource.bundle.url(forResource: fileResource)
     }
     

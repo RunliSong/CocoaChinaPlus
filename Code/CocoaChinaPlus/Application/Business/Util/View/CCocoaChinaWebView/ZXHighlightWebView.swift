@@ -125,10 +125,10 @@ open class ZXHighlightWebView: UIWebView {
     
     fileprivate func highlightStyleString() -> String {
         //TODO:路径问题后续优化
-        let arta_css_path = ("Frameworks/ZXKit.framework/ZXKit.bundle/" + ZXHighlightStyle.Arta.css() )
+        let arta_css_path = ("highlight/styles/" + ZXHighlightStyle.Arta.css() )
         
         let result = "<link rel='stylesheet' href='\(arta_css_path)'>\n" +
-            "<script src='Frameworks/ZXKit.framework/ZXKit.bundle/highlight.pack.js'></script>\n" +
+            "<script src='highlight/highlight.pack.js'></script>\n" +
         "<script>hljs.initHighlightingOnLoad();</script>"
         
         return result;

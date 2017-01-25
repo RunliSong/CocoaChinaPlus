@@ -65,7 +65,7 @@ class CCPTableArray: NSObject {
             }
             
             table.selectSubject.bindNext({ (article:CCArticleModel) in
-                ZXOpenURL("go/ccp/article?identity=\(article.identity)")
+                ZXOpenURL("go/ccp/article?identity=\(article.identity!)")
             }).addDisposableTo(self.disposeBag)
         }
     }

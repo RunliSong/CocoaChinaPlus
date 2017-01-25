@@ -31,8 +31,8 @@ class CCCocoaChinaWebView: ZXHighlightWebView {
                     return
                 }
                 
-                guard let error = response.error else {
-//                    print(error)
+                guard response.error == nil else {
+                    print(response.error!)
                     return
                 }
                 
@@ -71,7 +71,7 @@ extension CCCocoaChinaWebView {
         downloader.downloadImage(with: URL(string: imageURL)!, options: nil, progressBlock: nil) { [weak self] (image_download:Image?, error:NSError?, imageURL:URL?, originalData:Data?) in
             if let sself = self,let image = image_download {
                 DispatchQueue.main.async {
-                    sself.image = image_download
+                    sself.image = image
                 }
             }
         }
