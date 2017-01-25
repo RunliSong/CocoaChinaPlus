@@ -94,13 +94,40 @@ extension CCPArticleViewController {
         let shareButton = UIButton(frame: CGRect(x: 0, y: 0, width: 44, height: 44))
         shareButton.setImage(R.image.share(), for: UIControlState())
         shareButton.rx.tap.bindNext { [unowned self] _ in
-            UMSocialSnsService.presentSnsIconSheetView(self,
-                                                       appKey: CCAppKey.appUM,
-                                                       shareText: kADText(),
-                                                       shareImage: self.webview.image,
-                                                       shareToSnsNames: [UMShareToSina,UMShareToWechatSession,
-                                                                         UMShareToWechatTimeline,UMShareToWechatFavorite],
-                                                       delegate: self)
+            UMSocialUIManager.setPreDefinePlatforms([UMSocialPlatformType.sina,UMSocialPlatformType.wechatSession,UMSocialPlatformType.wechatTimeLine,UMSocialPlatformType.wechatFavorite])
+            UMSocialUIManager.showShareMenuViewInWindow(platformSelectionBlock: { [unowned self] (type:UMSocialPlatformType, userInfo:[AnyHashable : Any]?) in
+                let messageObject:UMSocialMessageObject = UMSocialMessageObject.init()
+                messageObject.text = kADText()
+                
+                if type == UMSocialPlatformType.sina {
+                    let shareObject = UMShareImageObject()
+                    
+                    //设置微博分享参数
+                    self.webview.scrollView.swContentCapture({ [unowned self] (image:UIImage?) in
+                        shareObject.shareImage = image
+                        shareObject.title = self.webview.title + " " + self.wapURL
+                        shareObject.descr = kADText()
+                        self.semaphore.signal()
+                    })
+                    _ = self.semaphore.wait(timeout: DispatchTime.distantFuture)
+                    messageObject.shareObject = shareObject
+                }else {
+                    let shareObject = UMShareWebpageObject()
+                    shareObject.title = self.webview.title
+                    shareObject.descr = kADText()
+                    shareObject.webpageUrl = self.wapURL
+                    messageObject.shareObject = shareObject
+                }
+                
+                UMSocialManager.default().share(to: type, messageObject: messageObject, currentViewController: self, completion: { (shareResponse:Any?, error:Error?) in
+                    if error != nil {
+                        print("Share Fail with error ：%@", error!)
+                    }else{
+                        print("Share succeed")
+                    }
+                })
+                
+            })
         }.addDisposableTo(self.disposeBag)
         
         let shareItem = UIBarButtonItem(customView: shareButton)
@@ -186,95 +213,4 @@ extension CCPArticleViewController {
                 self.cuteView.addAniamtionLikeGameCenterBubble()
         })
     }
-}
-
-extension CCPArticleViewController : UMSocialUIDelegate {
-    
-    /**
-    自定义关闭授权页面事件
-    
-    @param navigationCtroller 关闭当前页面的navigationCtroller对象
-    
-    */
-    
-    func closeOauthWebViewController(_ navigationCtroller: UINavigationController!, socialControllerService: UMSocialControllerService!) -> Bool {
-        print("自定义关闭授权页面事件");
-        return true;
-    }
-    
-    
-    /**
-    关闭当前页面之后
-    
-    @param fromViewControllerType 关闭的页面类型
-    
-    */
-    
-    func didCloseUIViewController(_ fromViewControllerType: UMSViewControllerType) {
-        print("关闭当前页面之后")
-    }
-    
-    
-    /**
-    各个页面执行授权完成、分享完成、或者评论完成时的回调函数
-    
-    @param response 返回`UMSocialResponseEntity`对象，`UMSocialResponseEntity`里面的viewControllerType属性可以获得页面类型
-    */
-    
-    func didFinishGetUMSocialData(inViewController response: UMSocialResponseEntity!) {
-        print("各个页面执行授权完成、分享完成、或者评论完成时的回调函数")
-        
-        //根据`responseCode`得到发送结果,如果分享成功
-        if(response.responseCode == UMSResponseCodeSuccess)
-        {
-            //得到分享到的微博平台名
-            
-            print("share to sns name is \((response.data as NSDictionary).allKeys.first!)")
-        }
-        
-    }
-    
-    /**
-    点击分享列表页面，之后的回调方法，你可以通过判断不同的分享平台，来设置分享内容。
-    @param platformName 点击分享平台
-    @prarm socialData   分享内容
-    */
-    func didSelectSocialPlatform(_ platformName: String!, with socialData: UMSocialData!) {
-        
-        let config : UMSocialExtConfig = socialData.extConfig
-        print("点击分享列表页面，之后的回调方法，你可以通过判断不同的分享平台，来设置分享内容。")
-        if platformName == UMShareToSina {
-            print("分享到新浪")
-            //设置微博分享参数
-            self.webview.scrollView.swContentCapture({ [unowned self] (image:UIImage?) in
-                config.sinaData.shareImage = image
-                config.sinaData.shareText = self.webview.title + " " + self.wapURL
-                self.semaphore.signal()
-            })
-            _ = semaphore.wait(timeout: DispatchTime.distantFuture)
-        }else if platformName == UMShareToWechatTimeline {
-            print("分享到微信朋友圈")
-            //设置微信朋友圈分享参数
-            config.wechatTimelineData.title = self.webview.title
-            config.wechatTimelineData.shareText = kADText()
-            config.wechatTimelineData.wxMessageType = UMSocialWXMessageTypeWeb
-            config.wechatTimelineData.url = self.wapURL
-        }else if platformName == UMShareToWechatSession {
-            print("分享到微信好友")
-            //设置微信好友分享参数
-            config.wechatSessionData.title = self.webview.title
-            config.wechatSessionData.shareText = kADText()
-            config.wechatSessionData.wxMessageType = UMSocialWXMessageTypeWeb
-            config.wechatSessionData.url = self.wapURL
-        }else if platformName == UMShareToWechatFavorite {
-            print("分享到微信收藏")
-            //设置微信收藏分享参数
-            config.wechatFavoriteData.title = self.webview.title
-            config.wechatFavoriteData.shareText = kADText()
-            config.wechatFavoriteData.wxMessageType = UMSocialWXMessageTypeWeb
-            config.wechatFavoriteData.url = self.wapURL
-        }else {
-            print("分享到其他")
-        }
-    };
 }

@@ -22,7 +22,108 @@ PODS:
   - SwiftyUserDefaults (3.0.0)
   - SwViewCapture (1.0.5)
   - UMengAnalytics (3.5.16)
-  - UMengSocialCOM (5.2.1)
+  - UMengUShare (6.2.2):
+    - UMengUShare/Core (= 6.2.2)
+    - UMengUShare/Network (= 6.2.2)
+    - UMengUShare/Plugin (= 6.2.2)
+    - UMengUShare/Social (= 6.2.2)
+    - UMengUShare/UI (= 6.2.2)
+  - UMengUShare/Core (6.2.2):
+    - UMengUShare/Network
+  - UMengUShare/Network (6.2.2)
+  - UMengUShare/Plugin (6.2.2):
+    - UMengUShare/Core
+    - UMengUShare/Plugin/IDFA (= 6.2.2)
+  - UMengUShare/Plugin/IDFA (6.2.2):
+    - UMengUShare/Core
+  - UMengUShare/Social (6.2.2):
+    - UMengUShare/Core
+    - UMengUShare/Social/AlipayShare (= 6.2.2)
+    - UMengUShare/Social/DingDing (= 6.2.2)
+    - UMengUShare/Social/Douban (= 6.2.2)
+    - UMengUShare/Social/DropBox (= 6.2.2)
+    - UMengUShare/Social/Email (= 6.2.2)
+    - UMengUShare/Social/EverNote (= 6.2.2)
+    - UMengUShare/Social/Facebook (= 6.2.2)
+    - UMengUShare/Social/Flickr (= 6.2.2)
+    - UMengUShare/Social/GooglePlus (= 6.2.2)
+    - UMengUShare/Social/Instagram (= 6.2.2)
+    - UMengUShare/Social/Kakao (= 6.2.2)
+    - UMengUShare/Social/LaiWang (= 6.2.2)
+    - UMengUShare/Social/Line (= 6.2.2)
+    - UMengUShare/Social/Linkedin (= 6.2.2)
+    - UMengUShare/Social/Pinterest (= 6.2.2)
+    - UMengUShare/Social/Pocket (= 6.2.2)
+    - UMengUShare/Social/QQ (= 6.2.2)
+    - UMengUShare/Social/Renren (= 6.2.2)
+    - UMengUShare/Social/Sina (= 6.2.2)
+    - UMengUShare/Social/SMS (= 6.2.2)
+    - UMengUShare/Social/TencentWeibo (= 6.2.2)
+    - UMengUShare/Social/Tumblr (= 6.2.2)
+    - UMengUShare/Social/Twitter (= 6.2.2)
+    - UMengUShare/Social/VKontakte (= 6.2.2)
+    - UMengUShare/Social/WeChat (= 6.2.2)
+    - UMengUShare/Social/WhatsApp (= 6.2.2)
+    - UMengUShare/Social/YiXin (= 6.2.2)
+    - UMengUShare/Social/YouDao (= 6.2.2)
+  - UMengUShare/Social/AlipayShare (6.2.2):
+    - UMengUShare/Core
+  - UMengUShare/Social/DingDing (6.2.2):
+    - UMengUShare/Core
+  - UMengUShare/Social/Douban (6.2.2):
+    - UMengUShare/Core
+  - UMengUShare/Social/DropBox (6.2.2):
+    - UMengUShare/Core
+  - UMengUShare/Social/Email (6.2.2):
+    - UMengUShare/Core
+  - UMengUShare/Social/EverNote (6.2.2):
+    - UMengUShare/Core
+  - UMengUShare/Social/Facebook (6.2.2):
+    - UMengUShare/Core
+  - UMengUShare/Social/Flickr (6.2.2):
+    - UMengUShare/Core
+  - UMengUShare/Social/GooglePlus (6.2.2):
+    - UMengUShare/Core
+  - UMengUShare/Social/Instagram (6.2.2):
+    - UMengUShare/Core
+  - UMengUShare/Social/Kakao (6.2.2):
+    - UMengUShare/Core
+  - UMengUShare/Social/LaiWang (6.2.2):
+    - UMengUShare/Core
+  - UMengUShare/Social/Line (6.2.2):
+    - UMengUShare/Core
+  - UMengUShare/Social/Linkedin (6.2.2):
+    - UMengUShare/Core
+  - UMengUShare/Social/Pinterest (6.2.2):
+    - UMengUShare/Core
+  - UMengUShare/Social/Pocket (6.2.2):
+    - UMengUShare/Core
+  - UMengUShare/Social/QQ (6.2.2):
+    - UMengUShare/Core
+  - UMengUShare/Social/Renren (6.2.2):
+    - UMengUShare/Core
+  - UMengUShare/Social/Sina (6.2.2):
+    - UMengUShare/Core
+  - UMengUShare/Social/SMS (6.2.2):
+    - UMengUShare/Core
+  - UMengUShare/Social/TencentWeibo (6.2.2):
+    - UMengUShare/Core
+  - UMengUShare/Social/Tumblr (6.2.2):
+    - UMengUShare/Core
+  - UMengUShare/Social/Twitter (6.2.2):
+    - UMengUShare/Core
+  - UMengUShare/Social/VKontakte (6.2.2):
+    - UMengUShare/Core
+  - UMengUShare/Social/WeChat (6.2.2):
+    - UMengUShare/Core
+  - UMengUShare/Social/WhatsApp (6.2.2):
+    - UMengUShare/Core
+  - UMengUShare/Social/YiXin (6.2.2):
+    - UMengUShare/Core
+  - UMengUShare/Social/YouDao (6.2.2):
+    - UMengUShare/Core
+  - UMengUShare/UI (6.2.2):
+    - UMengUShare/Core
 
 DEPENDENCIES:
   - Alamofire (~> 4.3.0)
@@ -39,7 +140,7 @@ DEPENDENCIES:
   - SwiftyUserDefaults (~> 3.0.0)
   - SwViewCapture (~> 1.0.5)
   - UMengAnalytics (~> 3.5.10)
-  - UMengSocialCOM (~> 5.2.1)
+  - UMengUShare (~> 6.2.2)
 
 SPEC CHECKSUMS:
   Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
@@ -57,8 +158,8 @@ SPEC CHECKSUMS:
   SwiftyUserDefaults: 0f1d45fc3aafb9064dac661e367f8f83fe21a4b4
   SwViewCapture: 7ddb627ffbc70b21d92690bf25a84e545c38083e
   UMengAnalytics: fdf0c0a8c07d8bffc012ffa3c68e5d490af42098
-  UMengSocialCOM: 074c135ce349aa4c8848d3fb8458757bcb6ffb67
+  UMengUShare: fc0a98b8d5297632e82874318fd72a10d17da228
 
-PODFILE CHECKSUM: d376f4732df5c72b121be35849d09e4460fa4826
+PODFILE CHECKSUM: d1a393788c5bc2d9da45502158c6cffae4992669
 
 COCOAPODS: 1.1.1

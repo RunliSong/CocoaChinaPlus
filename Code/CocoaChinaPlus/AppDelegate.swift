@@ -53,14 +53,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //删除一个星期前阅读过的未收藏的文章
         CCArticleService.cleanMouthAgo()
         
-        
-        
-        //模拟器模拟自动登录
-        #if (arch(i386) || arch(x86_64)) && os(iOS)
-            let str = "simulator" as NSString
-            
-        #endif
-        
         return true
     }
     
@@ -102,12 +94,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     
     //分享跳转相关
-    func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
-        return UMSocialSnsService.handleOpen(url)
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        return UMSocialManager.default().handleOpen(url)
     }
-    
-    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-        return UMSocialSnsService.handleOpen(url)
+    func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
+        return UMSocialManager.default().handleOpen(url)
     }
 }
 
