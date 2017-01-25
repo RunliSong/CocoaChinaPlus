@@ -15,7 +15,7 @@ class CCCollectionViewController: CCArticleTableViewController {
     fileprivate var currentIndex : Int = 0
     fileprivate var type : CCArticleType!
     
-    required init(navigatorURL URL: Foundation.URL, query: Dictionary<String, String>) {
+    required init(navigatorURL URL: URL?, query: Dictionary<String, String>) {
         var query2 = query
         query2["forceHighlight"] = "1"
         super.init(navigatorURL: URL, query: query2)
@@ -27,7 +27,6 @@ class CCCollectionViewController: CCArticleTableViewController {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()

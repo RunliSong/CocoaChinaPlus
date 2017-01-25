@@ -26,7 +26,7 @@ extension CCHTMLModelHandler {
         let psubject = PublishSubject<CCPHomeModel>()
         
         self.parser.parseHome { (model) -> Void in
-            psubject.on(.Next(model))
+            psubject.on(.next(model))
         }
         return psubject
     }
@@ -42,28 +42,25 @@ extension CCHTMLModelHandler {
         }
         
         let psubject = PublishSubject<[CCArticleModel]>()
-        
-        trigger.subscribeNext {[weak self] _ in
-            
+        trigger.bindNext {[weak self] _ in
             guard let sself = self else {
                 return
             }
             
             guard Holder.nextURL.characters.count > 0  else {
-                return psubject.on(.Next([CCArticleModel]()))
+                return psubject.on(.next([CCArticleModel]()))
             }
             
             sself.parser.parseSearch(Holder.nextURL, result: { (model, nextURL) -> Void in
-                psubject.on(.Next(model))
+                psubject.on(.next(model))
                 Holder.nextURL = nextURL != nil ? nextURL! : ""
             })
-            
-            }.addDisposableTo(self.disposeBag)
+        }.addDisposableTo(self.disposeBag)
         
         
         let url = self.searchFullURL(query)
         self.parser.parseSearch(url) { (model, nextURL) -> Void in
-            psubject.on(.Next(model))
+            psubject.on(.next(model))
             Holder.nextURL = nextURL != nil ? nextURL! : ""
         }
         

@@ -11,6 +11,7 @@ import Alamofire
 import Kingfisher
 import MBProgressHUD
 import RxSwift
+import SwViewCapture
 
 enum CCPArticleViewType {
     case blog
@@ -30,7 +31,9 @@ class CCPArticleViewController: ZXBaseViewController {
     
     fileprivate let disposeBag = DisposeBag()
     
-    required init(navigatorURL URL: Foundation.URL, query: Dictionary<String, String>) {
+    fileprivate var semaphore = DispatchSemaphore(value: 0)
+    
+    required init(navigatorURL URL: URL?, query: Dictionary<String, String>) {
         super.init(navigatorURL: URL, query: query)
         
         if query["identity"] != nil {
@@ -243,9 +246,12 @@ extension CCPArticleViewController : UMSocialUIDelegate {
         if platformName == UMShareToSina {
             print("分享到新浪")
             //设置微博分享参数
-            let image = self.webview.scrollView.capture()
-            config.sinaData.shareImage = image
-            config.sinaData.shareText = self.webview.title + " " + self.wapURL
+            self.webview.scrollView.swContentCapture({ [unowned self] (image:UIImage?) in
+                config.sinaData.shareImage = image
+                config.sinaData.shareText = self.webview.title + " " + self.wapURL
+                self.semaphore.signal()
+            })
+            _ = semaphore.wait(timeout: DispatchTime.distantFuture)
         }else if platformName == UMShareToWechatTimeline {
             print("分享到微信朋友圈")
             //设置微信朋友圈分享参数

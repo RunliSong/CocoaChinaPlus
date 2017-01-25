@@ -27,17 +27,17 @@ public class ZXGuideViewController: UIViewController {
 
     public weak var delegate: ZXGuideViewControllerDelegate?
     
-    private var scrollView : UIScrollView!
+    var scrollView : UIScrollView!
     fileprivate var pageControl : UIPageControl!
     fileprivate var enterButton : UIButton!
     
-    private var imageViews = [UIImageView]()
-    private var labels = [UILabel]()
+    fileprivate var imageViews = [UIImageView]()
+    fileprivate var labels = [UILabel]()
     
-    private var centerOfImages = [CGPoint]()
-    private var centerOfLabels = [CGPoint]()
+    fileprivate var centerOfImages = [CGPoint]()
+    fileprivate var centerOfLabels = [CGPoint]()
     
-    private var countOfPages:NSInteger = 0
+    fileprivate var countOfPages:NSInteger = 0
     
     private var disposeBag = DisposeBag()
     
@@ -142,7 +142,7 @@ extension ZXGuideViewController : UIScrollViewDelegate {
         let index = NSInteger(fabs(scrollView.contentOffset.x) / scrollView.frame.size.width)
         
         if(self.scrollView.contentOffset.x > 0) {
-            self.moveImageAndLabelAtIndex(index)
+            self.moveImageAndLabelAtIndex(index: index)
         }
     }
     
@@ -160,19 +160,19 @@ extension ZXGuideViewController : UIScrollViewDelegate {
             
             var p1 = self.centerOfImages[index]
             var p2 = self.centerOfImages[index + 1]
-            let p_image = self.ratePoint(p1, p2: p2, rate: scrollRate)
+            let p_image = self.ratePoint(p1: p1, p2: p2, rate: scrollRate)
             
             for image:UIImageView in self.imageViews {
-                image.hidden = true
+                image.isHidden = true
                 
                 image.center = p_image
                 let currentImage: UIImageView = self.imageViews[index]
                 if(scrollRate <= 0.8){
-                    currentImage.hidden = false
+                    currentImage.isHidden = false
                     currentImage.layer.opacity = Float(1.0 - scrollRate/0.8)
                 }else{
                     let nextImage: UIImageView = self.imageViews[index + 1]
-                    nextImage.hidden = false
+                    nextImage.isHidden = false
                     nextImage.layer.opacity = Float(scrollRate - 0.8) / 0.2
                 }
                 
@@ -180,20 +180,20 @@ extension ZXGuideViewController : UIScrollViewDelegate {
             
             p1 = self.centerOfLabels[index]
             p2 = self.centerOfLabels[index + 1]
-            let p_label = self.ratePoint(p1, p2: p2, rate: scrollRate)
+            let p_label = self.ratePoint(p1: p1, p2: p2, rate: scrollRate)
             
             for label:UILabel in self.labels {
-                label.hidden = true
+                label.isHidden = true
                 label.center = p_label
                 
                 let currentLabel = self.labels[index]
                 
                 if(scrollRate <= 0.8) {
-                    currentLabel.hidden = false
+                    currentLabel.isHidden = false
                     currentLabel.layer.opacity = Float(1.0-scrollRate/0.8)
                 }else {
                     let nextLabel = self.labels[index + 1]
-                    nextLabel.hidden = false
+                    nextLabel.isHidden = false
                     nextLabel.layer.opacity = Float(scrollRate-0.8)/0.2
                 }
             }
@@ -208,7 +208,7 @@ extension ZXGuideViewController : UIScrollViewDelegate {
         }
         
         if ((index == self.countOfPages - 2 && (scrollRate>0.9)) || (index==self.countOfPages-1)) {
-            self.enterButton.hidden = false
+            self.enterButton.isHidden = false
         }
         
     }

@@ -12,7 +12,7 @@ class CCAboutViewController: ZXBaseViewController {
 
     fileprivate var scrollView:UIScrollView!
     
-    required init(navigatorURL URL: Foundation.URL, query: Dictionary<String, String>) {
+    required init(navigatorURL URL: URL?, query: Dictionary<String, String>) {
         super.init(navigatorURL: URL, query: query)
     }
 

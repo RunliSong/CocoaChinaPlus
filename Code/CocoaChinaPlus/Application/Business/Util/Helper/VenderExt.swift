@@ -24,7 +24,7 @@ extension DataRequest {
             }
             
             let jiDoc = Ji(htmlData: response.data!)!
-            completionJi(ji: jiDoc, error: error)
+            completionJi(jiDoc, response.error)
           
         }
     }
@@ -72,16 +72,16 @@ extension Anchorable {
         var otherSize :CGFloat = 0.0
         
         switch edge {
-        case .Top:
+        case .top:
             otherSize =  ( superFrame.width - (2 * xPad) ) * otherSizeTupling
             
-        case .Left:
+        case .left:
             otherSize  = ( superFrame.height - (2 * yPad) ) * otherSizeTupling
             
-        case .Bottom:
+        case .bottom:
             otherSize = ( superFrame.width - (2 * xPad) ) * otherSizeTupling
             
-        case .Right:
+        case .right:
             otherSize = ( superFrame.height - (2 * yPad) ) * otherSizeTupling
         }
         

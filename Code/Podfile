@@ -8,6 +8,7 @@ target 'CocoaChinaPlus' do
 #pod 'Reveal-iOS-SDK', :configurations => ['Debug']
 
 pod 'AppBaseKit', '~> 0.1.0'
+pod 'SwViewCapture', '~> 1.0.5'
 
 pod 'Neon', '~> 0.4.0'
 pod 'SwiftyUserDefaults', '~> 3.0.0'

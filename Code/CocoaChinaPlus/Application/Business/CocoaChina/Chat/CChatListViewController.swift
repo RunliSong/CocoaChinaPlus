@@ -36,7 +36,7 @@ class CChatListViewController: ZXBaseViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    required init(navigatorURL URL: Foundation.URL, query: Dictionary<String, String>) {
+    required init(navigatorURL URL: URL?, query: Dictionary<String, String>) {
         fatalError("init(navigatorURL:query:) has not been implemented")
     }
 

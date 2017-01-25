@@ -143,15 +143,19 @@ public class ZXCircleView: UIView,UIScrollViewDelegate {
         
         if floatIndex - CGFloat(Int(floatIndex)) == 0 {
             self.currentUIndex = Int(floatIndex)
-            let count = self.circleDelegate?.numberOfItemsInCircleView(circleView: self)
-            guard count != nil && count > 0 else {
+            
+            guard let count = self.circleDelegate?.numberOfItemsInCircleView(circleView: self) else {
+                return
+            }
+            
+            guard count > 0 else {
                 return
             }
             
             if Int(floatIndex) == 0 {
-                self.scrollView.contentOffset = self.offsetAtUIndex(count!)
+                self.scrollView.contentOffset = self.offsetAtUIndex(index: count)
                 return
-            }else if Int(floatIndex) == count! + 1 {
+            }else if Int(floatIndex) == count + 1 {
                 self.scrollView.contentOffset = self.offsetAtUIndex(index: 1)
                 return
             }
@@ -169,16 +173,19 @@ public class ZXCircleView: UIView,UIScrollViewDelegate {
     
     //dataIndex 是数据源的下标  UIndex是UI布局的下标
     private func dataIndexFromUIndex(index: Int) -> Int {
-        let count = self.circleDelegate?.numberOfItemsInCircleView(circleView: self)
         
-        guard count != nil && count > 0 else {
+        guard let count = self.circleDelegate?.numberOfItemsInCircleView(circleView: self) else {
+            return 0
+        }
+        
+        guard count > 0 else {
             return 0
         }
         
         var dataIndex = index - 1
         if index == 0 {
-            dataIndex = count! - 1
-        }else if (index == count! + 1) {
+            dataIndex = count - 1
+        }else if (index == count + 1) {
             dataIndex = 0
         }
         return dataIndex
@@ -238,20 +245,12 @@ public class ZXCircleViewCell: UIView,NSMutableCopying {
         self.titleLabel.anchorAndFillEdge(Edge.bottom, xPad: 0, yPad: 20, otherSize: 20)
     }
     
-    //    func configure(model:CCArticleModel) {
-    //        imageView.sd_setImageWithURL(NSURL(string:model.imageURL!)!
-    //        )
-    //
-    //        titleLabel.text = model.title
-    //    }
-    
-    public func mutableCopyWithZone(zone: NSZone) -> AnyObject {
+    public func mutableCopy(with zone: NSZone? = nil) -> Any {
         let cell =  ZXCircleViewCell(frame: self.frame)
         cell.imageView.image = self.imageView.image
         cell.titleLabel.text = self.titleLabel.text
         
         return cell
     }
-    
 }
 

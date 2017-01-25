@@ -20,6 +20,7 @@
 		9E61C3301BBC463800C360E2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9E61C32F1BBC463800C360E2 /* Localizable.strings */; };
 		9E61C3331BBD4BC900C360E2 /* CCProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E61C3321BBD4BC900C360E2 /* CCProfileViewController.swift */; };
 		9E6B7DED1B8E069400591846 /* AppDef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6B7DEC1B8E069400591846 /* AppDef.swift */; };
+		9E991A231E385440000E221A /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E991A221E385440000E221A /* UIImage+.swift */; };
 		9EA065FC1BBEE2E500F8884C /* CCAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA065FB1BBEE2E500F8884C /* CCAboutViewController.swift */; };
 		9EA066431BC3A03800F8884C /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E61C3261BBB19B300C360E2 /* Accounts.framework */; };
 		9EA066441BC3A08D00F8884C /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E61C3281BBB19F900C360E2 /* Social.framework */; };
@@ -61,7 +62,6 @@
 		CE19A83B1C1EB55E00B4CB6A /* libPushSDK-1.8.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE19A80C1C1EB55E00B4CB6A /* libPushSDK-1.8.5.a */; };
 		CE19A83C1C1EB55E00B4CB6A /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = CE19A80D1C1EB55E00B4CB6A /* README.md */; };
 		CE2FF1301BE9EB58001396C8 /* CCPArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2FF12F1BE9EB58001396C8 /* CCPArticleViewController.swift */; };
-		CE3FD60F1C46B6BD00FBEA19 /* CCAD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3FD60E1C46B6BD00FBEA19 /* CCAD.framework */; };
 		CE4AB8C11BE11661009551C1 /* Changeset.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4AB8B31BE11661009551C1 /* Changeset.swift */; };
 		CE4AB8C81BE11661009551C1 /* Differentiator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4AB8BB1BE11661009551C1 /* Differentiator.swift */; };
 		CE4AB8C91BE11661009551C1 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = CE4AB8BC1BE11661009551C1 /* README.md */; };
@@ -132,6 +132,7 @@
 		9E61C32F1BBC463800C360E2 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		9E61C3321BBD4BC900C360E2 /* CCProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCProfileViewController.swift; sourceTree = "<group>"; };
 		9E6B7DEC1B8E069400591846 /* AppDef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDef.swift; sourceTree = "<group>"; };
+		9E991A221E385440000E221A /* UIImage+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		9EA065FB1BBEE2E500F8884C /* CCAboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCAboutViewController.swift; sourceTree = "<group>"; };
 		9EA066251BC2B5FB00F8884C /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		9EE4EFFB1B79DEE80071423A /* CocoaChinaPlus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CocoaChinaPlus.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -172,7 +173,6 @@
 		CE19A80C1C1EB55E00B4CB6A /* libPushSDK-1.8.5.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.5.a"; sourceTree = "<group>"; };
 		CE19A80D1C1EB55E00B4CB6A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		CE2FF12F1BE9EB58001396C8 /* CCPArticleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCPArticleViewController.swift; sourceTree = "<group>"; };
-		CE3FD60E1C46B6BD00FBEA19 /* CCAD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CCAD.framework; path = /Users/zixun/Documents/code/play/CocoaChinaPlus/Code/CocoaChinaPlus/Application/Vender/CCAD.framework; sourceTree = "<absolute>"; };
 		CE4AB8B31BE11661009551C1 /* Changeset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Changeset.swift; sourceTree = "<group>"; };
 		CE4AB8BB1BE11661009551C1 /* Differentiator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Differentiator.swift; sourceTree = "<group>"; };
 		CE4AB8BC1BE11661009551C1 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -234,7 +234,6 @@
 				CE19A7DE1C1EA76400B4CB6A /* AVFoundation.framework in Frameworks */,
 				CE19A83B1C1EB55E00B4CB6A /* libPushSDK-1.8.5.a in Frameworks */,
 				CE19A7DD1C1EA75D00B4CB6A /* MediaPlayer.framework in Frameworks */,
-				CE3FD60F1C46B6BD00FBEA19 /* CCAD.framework in Frameworks */,
 				CE19A7DC1C1EA75600B4CB6A /* CoreMotion.framework in Frameworks */,
 				CE19A7DB1C1EA74F00B4CB6A /* AudioToolbox.framework in Frameworks */,
 				CE19A7DA1C1EA74600B4CB6A /* StoreKit.framework in Frameworks */,
@@ -409,6 +408,7 @@
 			isa = PBXGroup;
 			children = (
 				9EF330AA1E365B0700477A9F /* String+.swift */,
+				9E991A221E385440000E221A /* UIImage+.swift */,
 				9EF330BD1E377DCB00477A9F /* UINavigationItem+.swift */,
 			);
 			path = Base;
@@ -919,6 +919,7 @@
 				CE5380C21BF18F5900751F55 /* CCArticleTableViewCell.swift in Sources */,
 				CE0B09721BDD264400D8F3AC /* CCSearchViewController.swift in Sources */,
 				CE5380BE1BF18F5900751F55 /* NSDate+String.swift in Sources */,
+				9E991A231E385440000E221A /* UIImage+.swift in Sources */,
 				CE5380B01BF18F5900751F55 /* CCArticleTableViewController.swift in Sources */,
 				9E61C3331BBD4BC900C360E2 /* CCProfileViewController.swift in Sources */,
 				E3265D961BB4230700750716 /* CCRemoteNotificationHandler.swift in Sources */,

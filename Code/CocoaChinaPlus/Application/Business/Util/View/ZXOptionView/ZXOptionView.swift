@@ -153,8 +153,8 @@ extension ZXOptionView : UICollectionViewDelegate,UICollectionViewDataSource {
         //颜色处理
         if let cell_pre_selected = self.cellForItem(at: IndexPath(row: self.selectIndex, section: 0)) {
             
-            UIView.transitionWithView((cell_pre_selected as! ZXOptionViewCell).textLabel, duration: 0.3, options: .TransitionCrossDissolve, animations: { () -> Void in
-                (cell_pre_selected as! ZXOptionViewCell).textLabel.textColor = ZXColor(0xB4B4B4)
+            UIView.transition(with: (cell_pre_selected as! ZXOptionViewCell).textLabel, duration: 0.3, options: .transitionCrossDissolve, animations: { () -> Void in
+                (cell_pre_selected as! ZXOptionViewCell).textLabel.textColor = UIColor(hex:0xB4B4B4)
                 }, completion: nil)
         }
         

@@ -33,7 +33,7 @@ class CCPBBSViewController: ZXBaseViewController {
     
     fileprivate var dataSource = CCPBBSModel(options: [CCPBBSOptionModel]())
     
-    required init(navigatorURL URL: Foundation.URL, query: Dictionary<String, String>) {
+    required init(navigatorURL URL: URL?, query: Dictionary<String, String>) {
         super.init(navigatorURL: URL, query: query)
         self.setup()
     }

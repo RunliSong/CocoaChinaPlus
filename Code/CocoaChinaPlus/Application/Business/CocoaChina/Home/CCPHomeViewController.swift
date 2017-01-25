@@ -40,12 +40,13 @@ class CCPHomeViewController: ZXBaseViewController {
     var tableArray: CCPTableArray?
     
     //初始方法
-    required init(navigatorURL URL: Foundation.URL, query: Dictionary<String, String>) {
-        super.init(navigatorURL: URL, query: query)
-    }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    
+    required init(navigatorURL URL: URL?, query: Dictionary<String, String>) {
+        super.init(navigatorURL: URL, query: query)
     }
     
     override func viewDidLoad() {

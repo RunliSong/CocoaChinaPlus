@@ -20,6 +20,7 @@ PODS:
   - SQLite.swift/standard (0.11.2)
   - SVPullToRefresh (0.4.1)
   - SwiftyUserDefaults (3.0.0)
+  - SwViewCapture (1.0.5)
   - UMengAnalytics (3.5.16)
   - UMengSocialCOM (5.2.1)
 
@@ -36,6 +37,7 @@ DEPENDENCIES:
   - SQLite.swift (~> 0.11.2)
   - SVPullToRefresh (= 0.4.1)
   - SwiftyUserDefaults (~> 3.0.0)
+  - SwViewCapture (~> 1.0.5)
   - UMengAnalytics (~> 3.5.10)
   - UMengSocialCOM (~> 5.2.1)
 
@@ -53,9 +55,10 @@ SPEC CHECKSUMS:
   SQLite.swift: 670c3e9e0a806bbfd56a3de5d530768dc0e6fe7c
   SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
   SwiftyUserDefaults: 0f1d45fc3aafb9064dac661e367f8f83fe21a4b4
+  SwViewCapture: 7ddb627ffbc70b21d92690bf25a84e545c38083e
   UMengAnalytics: fdf0c0a8c07d8bffc012ffa3c68e5d490af42098
   UMengSocialCOM: 074c135ce349aa4c8848d3fb8458757bcb6ffb67
 
-PODFILE CHECKSUM: 5bdcbeedd6f461f8882b869e1fa9786703603b9a
+PODFILE CHECKSUM: d376f4732df5c72b121be35849d09e4460fa4826
 
 COCOAPODS: 1.1.1

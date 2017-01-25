@@ -11,14 +11,14 @@ import UIKit
 
 class ZXBaseViewController: UIViewController{
     
-    var navURL = URL(string: "")
+    var navURL: URL?
     var navQuery = Dictionary<String,String>()
     
     convenience init(){
-        self.init(navigatorURL: URL(string: "")!, query: Dictionary<String, String>())
+        self.init(navigatorURL: nil, query: Dictionary<String, String>())
     }
     
-    required init(navigatorURL URL: Foundation.URL,query:Dictionary<String,String>) {
+    required init(navigatorURL URL: URL?,query:Dictionary<String,String>) {
         self.navURL = URL
         self.navQuery = query
         super.init(nibName: nil, bundle: nil)

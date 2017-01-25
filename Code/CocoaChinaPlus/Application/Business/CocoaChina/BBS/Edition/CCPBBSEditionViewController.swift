@@ -38,7 +38,7 @@ class CCPBBSEditionViewController: ZXBaseViewController {
     //url
     var currentLink = ""
     
-    required init(navigatorURL URL: Foundation.URL, query: Dictionary<String, String>) {
+    required init(navigatorURL URL: URL?, query: Dictionary<String, String>) {
         super.init(navigatorURL: URL, query: query)
 
         //設置tableview

@@ -18,14 +18,13 @@ class CCSearchViewController: CCArticleTableViewController {
     fileprivate var cancelButton:UIButton!
     //RxSwift资源回收包
     fileprivate let disposeBag = DisposeBag()
-    
-    
-    required init(navigatorURL URL: Foundation.URL, query: Dictionary<String, String>) {
-        super.init(navigatorURL: URL, query: query)
-    }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    required init(navigatorURL URL: URL?, query: Dictionary<String, String>) {
+         super.init(navigatorURL: URL, query: query)
     }
     
     override func viewDidLoad() {

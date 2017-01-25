@@ -152,7 +152,7 @@ class CCProfileUsualCell : CCPTableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        self.infoLabel.anchorAndFillEdge(Edge.Left, xPad: 20, yPad: 0, otherSize: self.containerView.frame.size.width - 20)
+        self.infoLabel.anchorAndFillEdge(Edge.left, xPad: 20, yPad: 0, otherSize: self.containerView.frame.size.width - 20)
     }
 }
 
@@ -164,7 +164,7 @@ class CCProfileFaceCell : CCPTableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        self.icon = UIImageView(image: R.image.chengxuyuan.circleImage())
+        self.icon = UIImageView(image: R.image.chengxuyuan()!.circleImage())
         self.containerView.addSubview(self.icon)
         
         self.tostaLabel = UILabel()
@@ -180,9 +180,9 @@ class CCProfileFaceCell : CCPTableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        self.tostaLabel.anchorAndFillEdge(.Bottom, xPad: 0, yPad: 0, otherSize: 20)
+        self.tostaLabel.anchorAndFillEdge(.bottom, xPad: 0, yPad: 0, otherSize: 20)
         let distance = self.tostaLabel.frame.origin.y
-        self.icon.align(.AboveCentered, relativeTo: self.tostaLabel, padding: 0, width: distance , height: distance)
+        self.icon.align(.aboveCentered, relativeTo: self.tostaLabel, padding: 0, width: distance , height: distance)
     }
     
     required init?(coder aDecoder: NSCoder) {
